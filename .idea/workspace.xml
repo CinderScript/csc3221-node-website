@@ -28,7 +28,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e75ae46f-f932-43a1-aa93-aa021e480ba0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,15 +39,26 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1qp9KV95P5P31Gb5IzcQwAklkc8" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="cf.first.check.clang-format" value="false" />
@@ -71,7 +82,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617765600705</updated>
-      <workItem from="1617765601937" duration="545000" />
+      <workItem from="1617765601937" duration="1233000" />
     </task>
     <servers />
   </component>
@@ -94,5 +105,21 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="405" y="505" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/-3840.0.1536.824@0.0.2560.1400" timestamp="1617766119925" />
+    <state width="1218" height="397" key="GridCell.Tab.0.bottom" timestamp="1617766542754">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1218" height="397" key="GridCell.Tab.0.bottom/0.0.2560.1400/-3840.0.1536.824@0.0.2560.1400" timestamp="1617766542754" />
+    <state width="1218" height="397" key="GridCell.Tab.0.center" timestamp="1617766542753">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1218" height="397" key="GridCell.Tab.0.center/0.0.2560.1400/-3840.0.1536.824@0.0.2560.1400" timestamp="1617766542753" />
+    <state width="1218" height="397" key="GridCell.Tab.0.left" timestamp="1617766542753">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1218" height="397" key="GridCell.Tab.0.left/0.0.2560.1400/-3840.0.1536.824@0.0.2560.1400" timestamp="1617766542753" />
+    <state width="1218" height="397" key="GridCell.Tab.0.right" timestamp="1617766542754">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1218" height="397" key="GridCell.Tab.0.right/0.0.2560.1400/-3840.0.1536.824@0.0.2560.1400" timestamp="1617766542754" />
   </component>
 </project>
