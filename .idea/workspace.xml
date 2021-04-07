@@ -27,7 +27,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e75ae46f-f932-43a1-aa93-aa021e480ba0" name="Default Changelist" comment="" />
+    <list default="true" id="e75ae46f-f932-43a1-aa93-aa021e480ba0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,6 +56,13 @@
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -61,7 +71,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617765600705</updated>
-      <workItem from="1617765601937" duration="159000" />
+      <workItem from="1617765601937" duration="545000" />
     </task>
     <servers />
   </component>
@@ -78,5 +88,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="405" y="505" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1617766119925">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="405" y="505" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400/-3840.0.1536.824@0.0.2560.1400" timestamp="1617766119925" />
   </component>
 </project>
