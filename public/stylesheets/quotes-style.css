@@ -1,0 +1,16 @@
+blockquote{
+    max-width: 40em;
+    border-left: 0.3em solid #4581a9;
+    margin-left: 0.5em;
+    padding-left: 2em;
+    font: 20px 'Roboto', sans-serif ;
+    color: darkblue;
+}
+
+.author{
+    display: block;
+    text-align: right;
+    padding-right: 8%;
+    font-size: smaller;
+    color: black;
+}
