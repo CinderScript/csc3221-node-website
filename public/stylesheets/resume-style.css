@@ -1,0 +1,55 @@
+h1{
+  margin-bottom: 0.2em;
+}
+h2{
+  font-family: sans-serif;
+}
+
+hr{
+  margin: 20px 0px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.date {
+  float: right;
+  font-size: 90%;
+  font-family: sans-serif;
+}
+
+.degree {
+  font-weight: bold;
+}
+
+.indent{
+  margin-left: 1.5em;
+}
+
+.name-info{
+  font-size: 80%;
+}
+
+.school{
+  font-style: italic;
+  font-size: 90%;
+}
+
+th {
+  min-width: 10em;
+}
+
+td {
+  font-size: 90%;
+}
+
+.details{
+  font-size: 90%;
+  display: block;
+  margin-left: 0.5em;
+}
