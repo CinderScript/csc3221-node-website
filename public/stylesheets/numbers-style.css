@@ -3,7 +3,6 @@
 }
 
 .content{
-    font-size: 15px;
     padding-bottom: 50px;
 }
 
@@ -65,7 +64,7 @@ tfoot{
 
 .gibberish-2 {
     border: 1px solid var(--border-color);
-
+    font-size: 14px;
     display: flex;
 }
 
