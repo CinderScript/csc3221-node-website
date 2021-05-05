@@ -53,3 +53,7 @@ td {
   display: block;
   margin-left: 0.5em;
 }
+
+span {
+  border-left: 2px double coral;
+}
