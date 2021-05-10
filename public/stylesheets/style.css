@@ -30,3 +30,17 @@ body {
 .fit{
     width: 100%;
 }
+
+label {
+    width: 100px;
+    padding-top: 15px;
+}
+
+button{
+    padding: 10px;
+}
+
+#send-btn{
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
