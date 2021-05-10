@@ -3,39 +3,161 @@
 <head>
     <meta charset="UTF-8">
 
-    <!-- FONTS -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <!-- Reactive page setup-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSS STYLES -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
     <link rel="stylesheet" href="stylesheets/style.css">
 
-    <title>Static Page - Maynard</title>
+    <title>Meerkat Madness!</title>
 </head>
 <body>
 
-<nav>
-    <a href="index.html" class="active">Home</a>
-    <a href="simple-page.html">Quotes</a>
-    <a href="resume.html">Resume</a>
-    <a href="numbers.html">Numbers</a>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Fennec Fox Cafe</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="restaurant/history.html">History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="restaurant/menu.html">Menu</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Locations
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="restaurant/location-switzerland.html">Swiss Alps</a></li>
+                        <li><a class="dropdown-item" href="restaurant/location-canada.html">Whistler Blackcomb</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="restaurant/contact.html">Contact</a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Menu Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
 </nav>
 
-<div class="content">
-    <h1>Welcome to my Page</h1>
-    <h2>My name is: Gregory Isaac Maynard</h2>
-    <h3>The day I had the most fun</h3>
-    <p>
-        The year was 27 ABY and the other clones and I had finished fighting in the Battle of Tirahnn.
-        I lost many friends in the fighting.  I especially miss Delta-192 whom I had become close to.
-        We grew up in the clone factory in kamino together.  Because the fighting was so hard, I think
-        supervisor Bob felt sorry for us.  Bob decided to throw us all our first birthday party.  We were
-        allowed to share a cake and they told us what a good job we were doing.  It was the <strong>best</strong> day of
-        my life.
-    </p>
-    <h3>To be continued ...</h3>
-    <h3>Movie Quotes: <a href="simple-page.html">here</a></h3>
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="images/location/mountain1.jpg" class="d-block w-100" alt="Snowy Mountain with River">
+        </div>
+        <div class="carousel-item">
+            <img src="images/location/mountain2.jpg" class="d-block w-100" alt="Snowy Mountains">
+        </div>
+        <div class="carousel-item">
+            <img src="images/location/mountain3.jpg" class="d-block w-100" alt="Mountains at Night">
+
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="offset-md-1 col-md-10 offset-lg-0 col-lg-12">
+            <h1>Welcome to the Fennec Fox Cafe</h1>
+            <hr>
+            <p>
+                Stop in for a good cup of coffee while hitting the slopes.  Originally located in Zermatt Switzerland,
+                we now serve skiers and snowboarders in 3 locations.  Our specialty is black coffee, we also serve food.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4 col-lg-3">
+            <div class="card">
+                <img src="images/fox.jpg" class="card-img-top" alt="Fennec Fox">
+                <div class="card-body">
+                    <h5 class="card-title">Our Cafe Mascot</h5>
+                    <p class="card-text">The fennec fox is not an arctic animal.  But it <strong>is</strong> cute.</p>
+                    <a href="#" class="btn btn-primary">Menu</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-lg-3">
+            <div class="card">
+                <img src="images/coffee/coffee1.jfif" class="card-img-top" alt="Fennec Fox">
+                <div class="card-body">
+                    <h5 class="card-title">Black Coffee</h5>
+                    <p class="card-text">We make a great cup of Joe!</p>
+                    <a href="#" class="btn btn-primary">Menu</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-lg-3">
+            <div class="card">
+                <img src="images/coffee/latte.jpg" class="card-img-top" alt="Fennec Fox">
+                <div class="card-body">
+                    <h5 class="card-title">Latte</h5>
+                    <p class="card-text">We also make lattes</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-lg-3">
+            <div class="card">
+                <img src="images/food/sandwitch2.jpg" class="card-img-top" alt="Fennec Fox">
+                <div class="card-body">
+                    <h5 class="card-title">Breakfast</h5>
+                    <p class="card-text">We serve breakfast all day.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <p class="message">
+            Enjoy your stay athe the Fennec Fox!
+        </p>
+    </div>
+
+</div>
+
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+        <span class="text-muted">&copy; 2021 - Fennic Fox Inc.</span>
+    </div>
+</footer>
+
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
 
 </body>
 </html>
