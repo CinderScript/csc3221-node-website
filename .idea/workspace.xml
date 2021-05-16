@@ -29,7 +29,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e75ae46f-f932-43a1-aa93-aa021e480ba0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/restaurant/location-canada.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/restaurant/location-canada.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/restaurant/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/restaurant/menu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +101,7 @@
       <workItem from="1619638616848" duration="72000" />
       <workItem from="1620176190491" duration="9733000" />
       <workItem from="1620253478684" duration="12089000" />
-      <workItem from="1620628964373" duration="3139000" />
+      <workItem from="1620628964373" duration="2498000" />
     </task>
     <servers />
   </component>
@@ -143,9 +145,5 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1761" height="167" key="GridCell.Tab.0.right/0.0.2560.1400/-3840.0.1536.824@0.0.2560.1400" timestamp="1620616459317" />
-    <state x="1425" y="334" key="run.anything.popup" timestamp="1620631879495">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1425" y="334" key="run.anything.popup/0.0.2560.1400/-3840.0.1536.824@0.0.2560.1400" timestamp="1620631879495" />
   </component>
 </project>
