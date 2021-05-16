@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>Testbench</title>
 
+    <style>
+        p{
+            color: blue;
+        }
+    </style>
 </head>
 <body>
 
@@ -12,26 +17,12 @@
     <p>
         <label for="password">Password</label>
         <input type="password" name="password" id="password" size="9" maxlength="9">
-        <input type="">
     </p>
 
     <p><input type="submit" value="Submit"></p>
 </form>
 
-
-<p id="favorite-quote">text</p>
-
-<script>
-    let jsonStructure = { "day": "Thursday", "date": { "year": 2015, "month": 2, "day": 12 }, "time": { "hour": 11, "minute": 44 } };
-
-    let asdf = JSON.stringify(jsonStructure, null, "..");
-    console.log(asdf)
-
-    alert(stringObject);
-
-</script>
-
-
+<p>We make a <span style="background-color: orange">living</span> by what we get, but we make a life by what we give. -Winston Churchill</p>
 
 </body>
 </html>
