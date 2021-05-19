@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vowel Consonant JS</title>
+
+    <style>
+        .bold{
+            font-weight: bold;
+        }
+        .italic{
+            font-style: italic;
+        }
+    </style>
+
+</head>
+<body>
+
+<br>
+<br>
+
+    <label for="input-text">Input Text</label>
+    <input type="text" name="input-text" id="input-text" size="30" maxlength="100"> <br>
+
+    <label for="bold">Bold:</label>
+    <input type="checkbox" name="bold" id="bold"> <br>
+
+    <label for="italic">Italic</label>
+    <input type="checkbox" name="italic" id="italic"> <br>
+
+    <label for="vowel">Get Vowels</label>
+    <input type="radio" name="letter" id="vowel" checked> <br>
+
+    <label for="consonants">Get Consonant</label>
+    <input type="radio" name="letter" id="consonant"> <br>
+
+    <label for="colors">Set Color</label>
+    <input type="color" name="colors" id="colors"> <br>
+
+<br>
+    <div id="output-text" style="border: #2a4a58 1px solid; height: 100px; width: 300px"></div>
+
+<br>
+<br>
+
+    <button onclick="FindCharacters()" >Submit</button>
+
+<script>
+
+    function FindCharacters(){
+        let output = "";
+        let input = document.getElementById("input-text").value;
+
+        let isBold = document.getElementById("bold").checked;
+        let isItalic = document.getElementById("italic").checked;
+        let optionVowel = document.getElementById("vowel").checked;
+        let color = document.getElementById("colors").value;
+
+        let vowels = ["a", "e", "i", "o", "u"];
+
+        for( let character of input ){
+
+            // print a space if it is a space
+            if (character == " "){
+                output += "  ";
+                continue;
+            }
+
+            vowel = vowels.findIndex( (x) => { return x.toLowerCase() == character } );
+
+            if ( optionVowel ) {    // if the user wants vowels
+                //add vowel
+                if (vowel != -1) {
+                    output += character;
+                }
+                else{
+                    output += "*";
+                }
+            }
+
+            else {                  // if the user wants consonant
+                if (vowel == -1){
+                    output += character;
+                }
+                else{
+                    output += "*";
+                }
+            }
+        }
+
+        let outputDiv = document.getElementById("output-text");
+
+        if (isBold)
+            outputDiv.classList.add("bold");
+        else
+            outputDiv.classList.remove("bold");
+
+        if (isItalic)
+            outputDiv.classList.add("italic");
+        else
+            outputDiv.classList.remove("italic");
+
+        outputDiv.innerHTML = "<span style=\"color:" + color + "\">" + output + "</span>" ;
+    }
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+#game-window{
+    border: dodgerblue 2px solid;
+}
+
+.game-controls{
+    background-color: aliceblue;
+    height: 400px;
+    padding: 15px;
+    margin: 0px 15px 0px 15px;
+}
+
+.game-output{
+    background-color: azure;
+    height: 100%;
+    padding: 15px;
+    margin: 0px 15px 0px 15px;
+}
+
+#kick-image{
+    width: 100%;
+}
+
+.row{
+    padding: 15px 0px;
+}

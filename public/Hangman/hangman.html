@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hangman</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+          crossorigin="anonymous">
+
+    <!-- CSS STYLES -->
+    <link rel="stylesheet" href="../stylesheets/style.css">
+    <link rel="stylesheet" href="../stylesheets/hangman.css">
+
+    <script>
+        var gameWindow;
+
+        // Settup DOM elements
+        document.addEventListener("DOMContentLoaded", () => {
+
+            document.getElementById("play-btn").onclick = Run;
+
+            gameWindow = document.getElementById("game-window");
+        });
+
+
+
+        function Run(){
+
+            if (gameWindow.classList.contains("d-none"))
+                gameWindow.classList.remove("d-none");
+            else
+                gameWindow.classList.add("d-none");
+        };
+    </script>
+
+</head>
+<body>
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="../simple-page.html">Quotes</a>
+    <a href="../resume.html">Resume</a>
+    <a href="../numbers.html">Numbers</a>
+    <a href="#" class="active">H-A-N-G-M-A-N!</a>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">This...</h1>
+            <h1 class="display-4">Is...</h1>
+            <h1 class="display-2">H A N G M A N!!!!</h1>
+        </div>
+        <div class="col-md-6">
+            <img id="kick-image" src="https://thumbs.dreamstime.com/b/sparta-d-render-work-path-34577790.jpg" alt="Sparta Kick">
+        </div>
+    </div>
+
+    <div class="row">
+        <p> <!-- button is width=100% if direct child of row -->
+            <button id="play-btn" type="button" class="btn btn-primary">New Game</button>
+        </p>
+    </div>
+
+
+    <div id="game-window" class="row">
+        <div class="col-md-6 p-0">
+            <div class="game-controls">
+
+            </div>
+        </div>
+        <div class="col-md-6 p-0">
+            <div class="game-output">
+                <p>happy days</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+</body>
+</html>
