@@ -34,3 +34,7 @@
     border-bottom: darkblue 2px solid;
     text-align: center;
 }
+
+.form-text.small{
+    font-size: 12px;
+}
