@@ -1,3 +1,11 @@
+// * * * * * * * * CLASSES * * * * * * * * *//
+
+
+
+
+
+// * * * * * * * * VARS * * * * * * * * *//
+
 // html elements
 let wordProgress;
 let manProgress;
@@ -10,10 +18,14 @@ let maxLettersInput;
 let wordGuessInput;
 let letterGuessInput;
 
+// word to guess
 let theChosenWord = "unselected"
 
 
-// INITIALIZATION - GET ELEMENTS, SET HANDLERS, POPULATE DROP DOWN
+// * * * * * * * * PAGE INITIALIZATION * * * * * * * * *//
+
+
+// assign page element vars, assign event handlers, popuate html content
 document.addEventListener("DOMContentLoaded", () => {
 
     //settup button handlers
@@ -44,6 +56,11 @@ document.addEventListener("DOMContentLoaded", () => {
     gallowsDisplay.innerText = hangmanASCII;
 });
 
+
+
+// * * * * * * * * Event Handlers * * * * * * * * *//
+
+
 // gameplay settup.  Choose word show letter positions
 function Play(){
     let possibleWords;
@@ -55,6 +72,7 @@ function Play(){
     // select only the words with correct number of letters
     FilterWordsBySize(possibleWords, maxLettersInput.value);
 
+    // randomly choose one of those words
     let length = possibleWords.length;
     let randomIndex = Math.floor(Math.random() * length)
     theChosenWord = possibleWords[randomIndex];
@@ -74,9 +92,13 @@ function GuessWord(){
 }
 
 
+// * * * * * * * * html element updaters * * * * * * * * *//
+
+
 function ShowNLetterboxes(n){
     let boxesToRemove = letterBoxes.length - n;
 
+    // remove uneeded letter boxes
     for (let i = 0; i < boxesToRemove; i++) {
         letterBoxes[i].classList.add("d-none");
     }
@@ -110,6 +132,10 @@ async function SetProgress(bar, value){
     bar.classList.remove("progress-bar-animated");
 }
 
+
+// * * * * * * * * helper functions * * * * * * * * *//
+
+
 // used for easier to read waiting intervals/timeouts (async style code)
 function Sleep(ms) {
     return new Promise( callback => setTimeout(callback, ms));
@@ -123,6 +149,10 @@ function FilterWordsBySize(words, sizeCap){
         }
     }
 }
+
+
+// * * * * * * * * DATA * * * * * * * * *//
+
 
 let wordBank =
     [
