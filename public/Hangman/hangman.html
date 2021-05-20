@@ -32,7 +32,7 @@
         <div class="col-md-6">
             <h1 class="display-4">This...</h1>
             <h1 class="display-4">Is...</h1>
-            <h1 class="display-2">H-A-N-G-M-A-N!!!!</h1>
+            <h1 class="display-2">H-A-N-G-M-A-N!!!</h1>
         </div>
         <div class="col-md-6">
             <img id="kick-image" src="https://thumbs.dreamstime.com/b/sparta-d-render-work-path-34577790.jpg" alt="Sparta Kick">
@@ -41,7 +41,7 @@
 
     <div id="game-window" class="row p-0 shadow bg-light">
 
-        <div class="col-md-5 col-lg-4 p-0">
+        <div class="col-md-5 p-0">
             <!-- -- -- -- -- -- GAME CONTROLS FORM -- -- -- -- -- -- -->
             <div class="game-controls">
 
@@ -50,16 +50,49 @@
                     <label for="word-categories" class="w-100">Hangman Category</label>
                 </div>
 
-                <div class="form-floating mb-3">
-                    <input type="number" name="word-letters-max" id="word-letters-max" class="form-control shadow-sm"
-                           value="4" placeholder="for-bootstrap-floating-label">
-                    <label for="word-letters-max" class="w-100">Maximum Letter Count</label>
-                    <div class="form-text small">Maximum number of letters in the hangman word (3 to 12).</div>
+                <div class="row gy-2 pb-0">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="number" name="word-letters-max" id="word-letters-max" class="form-control shadow-sm"
+                                   value="4" placeholder="for-bootstrap-floating-label">
+                            <label for="word-letters-max" class="w-100">Letter Count</label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3 d-flex ">
+                        <button id="play-btn" type="button" class="btn btn-primary">Play</button>
+                    </div>
                 </div>
 
-                <button id="play-btn" type="button" class="btn btn-primary">Play</button>
+                <div class="form-text small">Maximum number of letters in the hangman word (3 to 12).</div>
+                <hr>
 
-                <button id="guess-letter-btn" type="button" class="btn btn-primary">Guess</button>
+                <div class="row gy-2 pb-0">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" id="letter-guess" name="letter-guess" placeholder="placeholder" class="form-control shadow-sm" maxlength="1">
+                            <label for="letter-guess">Guess Letter</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 d-flex">
+                        <button id="guess-letter-btn" type="button" class="btn btn-primary">Guess</button>
+                    </div>
+                </div>
+                <div class="form-text small">You have 6 guesses total.</div>
+
+                <div class="row gy-2 pb-0">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" id="word-guess" name="word-guess" placeholder="placeholder" class="form-control shadow-sm" maxlength="12">
+                            <label for="word-guess">Guess Word</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 d-flex">
+                        <button id="guess-word-btn" type="button" class="btn btn-primary">Guess</button>
+                    </div>
+                </div>
+                <div class="form-text small">You only get one try!</div>
+
             </div>
         </div>
 

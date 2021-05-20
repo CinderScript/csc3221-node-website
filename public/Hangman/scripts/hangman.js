@@ -1,42 +1,58 @@
+let theChosenWord = "unselected"
 let gameWindow;
 let wordProgress;
 let manProgress;
-let categories;
-let gallows;
+let categoriesDropdown;
+let gallowsDisplay;
 
 // INITIALIZATION - GET ELEMENTS, SET HANDLERS, POPULATE DROP DOWN
 document.addEventListener("DOMContentLoaded", () => {
 
+    //settup button handlers
     document.getElementById("play-btn").onclick = Play;
     document.getElementById("guess-letter-btn").onclick = GuessLetter;
+    document.getElementById("guess-word-btn").onclick = GuessWord;
 
+    // get page elements
     gameWindow = document.getElementById("game-window");
     wordProgress = document.getElementById("word-progress");
     manProgress = document.getElementById("man-progress");
-    categories = document.getElementById("word-categories");
-    gallows = document.getElementById("gallows");
+    categoriesDropdown = document.getElementById("word-categories");
+    gallowsDisplay = document.getElementById("gallows");
 
     // write each category name from the json object to the select element's options
     for (const wordGroup of wordBank){
         option = document.createElement("option");
         option.value = wordGroup.category;
         option.textContent = wordGroup.category;
-        categories.appendChild(option);
+        categoriesDropdown.appendChild(option);
     }
 
     // draw gallows
-    gallows.innerText = hangmanASCII;
+    gallowsDisplay.innerText = hangmanASCII;
 });
 
 function Play(){
+    let possibleWords;
+    // find words in the selected catagory
+    for ( const wordGroup of wordBank )
+        if ( wordGroup.category === categoriesDropdown.value)
+            possibleWords = wordGroup.words;
 
-    if (gameWindow.classList.contains("d-none"))
-        gameWindow.classList.remove("d-none");
-    else
-        gameWindow.classList.add("d-none");
+    // select only the words with correct number of letters
+    
+
+    let length = possibleWords.length;
+    let randomIndex = Math.floor(Math.random() * length)
+    theChosenWord = possibleWords[randomIndex];
 }
 
 function GuessLetter(){
+    SetProgress( wordProgress, 80);
+    SetProgress( manProgress, 20);
+}
+
+function GuessWord(){
     SetProgress( wordProgress, 80);
     SetProgress( manProgress, 20);
 }
