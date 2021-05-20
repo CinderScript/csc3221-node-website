@@ -3,38 +3,39 @@
     padding-bottom: 15px !important;
 }
 
+#kick-image{
+    width: 100%;
+}
+
 .game-controls{
-    height: 400px;
     padding: 15px;
     margin: 15px;
+}
+
+
+.form-text.small{
+    font-size: 12px;
 }
 
 .game-output{
-    height: 100%;
-    padding: 15px;
-    margin: 15px;
-}
-
-#kick-image{
-    width: 100%;
+    margin: 12px;
 }
 
 .row{
     padding: 15px 0px;
 }
-
-#game-window label{
-    width: 160px;
-}
-
 .letter-box{
-    display: inline-block;
     height: 25px;
     width: 20px;
-    border-bottom: darkblue 2px solid;
+    border-bottom: darkblue 1px solid;
     text-align: center;
+    margin: 4px;
 }
 
-.form-text.small{
-    font-size: 12px;
+#word-container{
+    background-color: aliceblue;
+}
+
+#gallows{
+    text-align: center;
 }
