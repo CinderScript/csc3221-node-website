@@ -26,3 +26,11 @@
 #game-window label{
     width: 160px;
 }
+
+.letter-box{
+    display: inline-block;
+    height: 25px;
+    width: 20px;
+    border-bottom: darkblue 2px solid;
+    text-align: center;
+}
