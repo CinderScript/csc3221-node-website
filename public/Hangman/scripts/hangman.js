@@ -13,6 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
     wordProgress = document.getElementById("word-progress");
     manProgress = document.getElementById("man-progress");
     categories = document.getElementById("word-categories");
+
+
+
+    PopulateCategories();
 });
 
 // used for easier to read waiting intervals/timeouts (async style code)
@@ -21,6 +25,14 @@ function Sleep(ms) {
 }
 
 function PopulateCategories(){
+
+    for (const wordGroup of wordBank){
+        option = document.createElement("option");
+        option.value = wordGroup.category;
+        option.textContent = wordGroup.category;
+        categories.appendChild(option);
+    }
+
 
 }
 
@@ -65,9 +77,9 @@ async function SetProgress(bar, value){
 }
 
 
-let wordBank = {
-    "Subjects" : [
-        {"subject": "Animals", "words": ["dog", "cat", "mouse", "rabbit", "horse", "anaconda", "ox", "tardigrade", "turtle", "bear"]},
-        {"subject": "Fruits", "words": ["apple", "pear", "fig", "grape", "watermelon", "strawberry", "persimmon", "cherimoya", "plumb", "avacado"]},
-        {"subject": "State Of Mind", "words": ["fearful", "happy", "sad", "mad", "indecisive", "content", "agitated", "confused", "twitterpated", "convinced"]}
-        ]};
+let wordBank =
+    [
+        {"category": "Animal", "words": ["dog", "cat", "mouse", "rabbit", "horse", "anaconda", "ox", "tardigrade", "turtle", "bear"]},
+        {"category": "Fruit", "words": ["apple", "pear", "fig", "grape", "watermelon", "strawberry", "persimmon", "cherimoya", "plumb", "avacado"]},
+        {"category": "State Of Mind", "words": ["fearful", "happy", "sad", "mad", "indecisive", "content", "agitated", "confused", "twitterpated", "convinced"]}
+    ];
