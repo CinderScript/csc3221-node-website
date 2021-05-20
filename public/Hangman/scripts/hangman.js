@@ -3,50 +3,37 @@ let wordProgress;
 let manProgress;
 let categories;
 
-// Get elements and set event handlers
+// INITIALIZATION - GET ELEMENTS, SET HANDLERS, POPULATE DROP DOWN
 document.addEventListener("DOMContentLoaded", () => {
 
-    document.getElementById("play-btn").onclick = Run;
-    document.getElementById("guess-btn").onclick = Guess;
+    document.getElementById("play-btn").onclick = Play;
+    document.getElementById("guess-letter-btn").onclick = GuessLetter;
 
     gameWindow = document.getElementById("game-window");
     wordProgress = document.getElementById("word-progress");
     manProgress = document.getElementById("man-progress");
     categories = document.getElementById("word-categories");
 
-
-
-    PopulateCategories();
-});
-
-// used for easier to read waiting intervals/timeouts (async style code)
-function Sleep(ms) {
-    return new Promise( callback => setTimeout(callback, ms));
-}
-
-function PopulateCategories(){
-
+    // write each category name from the json object to the select element's options
     for (const wordGroup of wordBank){
         option = document.createElement("option");
         option.value = wordGroup.category;
         option.textContent = wordGroup.category;
         categories.appendChild(option);
     }
+});
 
-
-}
-
-function Guess(){
-    SetProgress( wordProgress, 80);
-    SetProgress( manProgress, 20);
-}
-
-function Run(){
+function Play(){
 
     if (gameWindow.classList.contains("d-none"))
         gameWindow.classList.remove("d-none");
     else
         gameWindow.classList.add("d-none");
+}
+
+function GuessLetter(){
+    SetProgress( wordProgress, 80);
+    SetProgress( manProgress, 20);
 }
 
 async function SetProgress(bar, value){
@@ -76,6 +63,10 @@ async function SetProgress(bar, value){
     bar.classList.remove("progress-bar-animated");
 }
 
+// used for easier to read waiting intervals/timeouts (async style code)
+function Sleep(ms) {
+    return new Promise( callback => setTimeout(callback, ms));
+}
 
 let wordBank =
     [

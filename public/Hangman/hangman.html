@@ -39,28 +39,27 @@
         </div>
     </div> <!-- row -->
 
-    <div class="row">
-        <p> <!-- button is width=100% if direct child of row -->
-            <button id="play-btn" type="button" class="btn btn-primary">New Game</button>
-        </p>
-    </div> <!-- row -->
-
     <div id="game-window" class="row p-0 shadow bg-light">
 
         <div class="col-md-5 col-lg-4 p-0">
             <!-- -- -- -- -- -- GAME CONTROLS FORM -- -- -- -- -- -- -->
             <div class="game-controls">
-                <label for="word-categories" class="form-label">Choose a category: </label>
-                <select name="word-categories" id="word-categories"><!-- populated by js --></select> <br>
 
-
-                <div class="form-floating mb-3">
-                    <input type="number" name="word-letters-max" id="word-letters-max" class="form-control shadow-sm" placeholder="text">
-                    <label for="word-letters-max">Max Letters</label>
-                    <div class="form-text">Maximum number of letters in hangman word.</div>
+                <div class="form-floating">
+                    <select name="word-categories" id="word-categories" class="form-select"><!-- populated by js --></select> <br>
+                    <label for="word-categories" class="w-100">Hangman Category</label>
                 </div>
 
-                <button id="guess-btn" type="button" class="btn btn-primary">Guess</button>
+                <div class="form-floating mb-3">
+                    <input type="number" name="word-letters-max" id="word-letters-max" class="form-control shadow-sm"
+                           value="4" placeholder="for-bootstrap-floating-label">
+                    <label for="word-letters-max" class="w-100">Maximum Letter Count</label>
+                    <div class="form-text">Maximum number of letters in the hangman word.</div>
+                </div>
+
+                <button id="play-btn" type="button" class="btn btn-primary">Play</button>
+
+                <button id="guess-letter-btn" type="button" class="btn btn-primary">Guess</button>
             </div>
         </div>
 
