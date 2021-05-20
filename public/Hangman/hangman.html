@@ -27,136 +27,138 @@
     <a href="#" class="active">H-A-N-G-M-A-N!</a>
 </nav>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <h1 class="display-4">This...</h1>
-            <h1 class="display-4">Is...</h1>
-            <h1 class="display-2">H-A-N-G-M-A-N!!!</h1>
-        </div>
-        <div class="col-md-6">
-            <img id="kick-image" src="https://thumbs.dreamstime.com/b/sparta-d-render-work-path-34577790.jpg" alt="Sparta Kick">
-        </div>
-    </div> <!-- row -->
+<div class="page-content"> <!-- flexbox item - stretch to fill -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="display-4">This...</h1>
+                <h1 class="display-4">Is...</h1>
+                <h1 class="display-2">H-A-N-G-M-A-N!!!</h1>
+            </div>
+            <div class="col-md-6">
+                <img id="kick-image" src="https://thumbs.dreamstime.com/b/sparta-d-render-work-path-34577790.jpg" alt="Sparta Kick">
+            </div>
+        </div> <!-- row -->
 
-    <div id="game-window" class="row p-0 shadow bg-light">
+        <div id="game-window" class="row p-0 shadow bg-light">
 
-        <div class="col-md-5 p-0">
-            <!-- -- -- -- -- -- GAME CONTROLS FORM -- -- -- -- -- -- -->
-            <div class="game-controls">
+            <div class="col-md-5 p-0">
+                <!-- -- -- -- -- -- GAME CONTROLS FORM -- -- -- -- -- -- -->
+                <div class="game-controls">
 
-                <!-- -- Categories select -- -->
-                <div class="form-floating">
-                    <select name="word-categories" id="word-categories" class="form-select"><!-- populated by js --></select> <br>
-                    <label for="word-categories" class="w-100">Hangman Category</label>
-                </div>
+                    <!-- -- Categories select -- -->
+                    <div class="form-floating">
+                        <select name="word-categories" id="word-categories" class="form-select"><!-- populated by js --></select> <br>
+                        <label for="word-categories" class="w-100">Hangman Category</label>
+                    </div>
 
-                <!-- -- Maximum Letters Input -- -->
-                <div class="row gy-2 pb-0">
-                    <div class="col">
-                        <div class="form-floating">
-                            <input type="number" name="word-letters-max" id="word-letters-max" class="form-control shadow-sm"
-                                   value="4" placeholder="for-bootstrap-floating-label">
-                            <label for="word-letters-max" class="w-100">Letter Count</label>
+                    <!-- -- Maximum Letters Input -- -->
+                    <div class="row gy-2 pb-0">
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="number" name="word-letters-max" id="word-letters-max" class="form-control shadow-sm"
+                                       value="4" placeholder="for-bootstrap-floating-label">
+                                <label for="word-letters-max" class="w-100">Letter Count</label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 d-flex ">
+                            <button id="play-btn" type="button" class="btn btn-primary">Play</button>
                         </div>
                     </div>
 
-                    <div class="col-sm-3 d-flex ">
-                        <button id="play-btn" type="button" class="btn btn-primary">Play</button>
-                    </div>
-                </div>
-
-                <div class="form-text small">Maximum number of letters in the hangman word (3 to 12).</div>
-                <hr>
+                    <div class="form-text small">Maximum number of letters in the hangman word (3 to 12).</div>
+                    <hr>
 
 
-                <!-- -- Guess Letter Input -- -->
-                <div class="row gy-2 pb-0">
-                    <div class="col">
-                        <div class="form-floating">
-                            <input type="text" id="letter-guess" name="letter-guess" placeholder="placeholder" class="form-control shadow-sm" maxlength="1">
-                            <label for="letter-guess">Guess Letter</label>
+                    <!-- -- Guess Letter Input -- -->
+                    <div class="row gy-2 pb-0">
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" id="letter-guess" name="letter-guess" placeholder="placeholder" class="form-control shadow-sm" maxlength="1">
+                                <label for="letter-guess">Guess Letter</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 d-flex">
+                            <button id="guess-letter-btn" type="button" class="btn btn-primary">Guess</button>
                         </div>
                     </div>
-                    <div class="col-sm-3 d-flex">
-                        <button id="guess-letter-btn" type="button" class="btn btn-primary">Guess</button>
-                    </div>
-                </div>
-                <div class="form-text small">You have 6 guesses total.</div>
+                    <div class="form-text small">You have 6 guesses total.</div>
 
 
-                <!-- -- Guess Letter Input -- -->
-                <div class="row gy-2 pb-0">
-                    <div class="col">
-                        <div class="form-floating">
-                            <input type="text" id="word-guess" name="word-guess" placeholder="placeholder" class="form-control shadow-sm" maxlength="12">
-                            <label for="word-guess">Guess Word</label>
+                    <!-- -- Guess Letter Input -- -->
+                    <div class="row gy-2 pb-0">
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="text" id="word-guess" name="word-guess" placeholder="placeholder" class="form-control shadow-sm" maxlength="12">
+                                <label for="word-guess">Guess Word</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 d-flex">
+                            <button id="guess-word-btn" type="button" class="btn btn-primary">Guess</button>
                         </div>
                     </div>
-                    <div class="col-sm-3 d-flex">
-                        <button id="guess-word-btn" type="button" class="btn btn-primary">Guess</button>
+                    <div class="form-text small">You only get one try!</div>
+
+                </div>
+            </div>
+
+            <div class="col p-0">
+                <!-- -- -- -- -- -- GAME OUTPUT -- -- -- -- -- -- -->
+                <!-- flexbox: gallows and word container flex as column and gallows stretches to fill -->
+                <div class="d-flex flex-column justify-content-end game-output bg-white shadow-sm h-100">
+
+                    <div id="gallows-container" class="flex-grow-1">
+                        <pre id="gallows" class="pt-4"></pre>
                     </div>
-                </div>
-                <div class="form-text small">You only get one try!</div>
+                    <div id="word-container" class="d-flex flex-row justify-content-center">
+                        <div class="letter-box">A</div>
+                        <div class="letter-box">A</div>
+                        <div class="letter-box">A</div>
+                        <div class="letter-box">A</div>
+                        <div class="letter-box">A</div>
+                        <div class="letter-box">A</div>
+                        <div class="letter-box">A</div>
+                        <div class="letter-box">A</div>
+                        <div class="letter-box">A</div>
+                        <div class="letter-box">A</div>
+                        <div class="letter-box">A</div>
+                        <div class="letter-box">A</div>
+                    </div>
 
+                </div>
             </div>
-        </div>
 
-        <div class="col p-0">
-            <!-- -- -- -- -- -- GAME OUTPUT -- -- -- -- -- -- -->
-            <!-- flexbox: gallows and word container flex as column and gallows stretches to fill -->
-            <div class="d-flex flex-column justify-content-end game-output bg-white shadow-sm h-100">
-
-                <div id="gallows-container" class="flex-grow-1">
-                    <pre id="gallows" class="pt-4"></pre>
-                </div>
-                <div id="word-container" class="d-flex flex-row justify-content-center">
-                    <div class="letter-box">A</div>
-                    <div class="letter-box">A</div>
-                    <div class="letter-box">A</div>
-                    <div class="letter-box">A</div>
-                    <div class="letter-box">A</div>
-                    <div class="letter-box">A</div>
-                    <div class="letter-box">A</div>
-                    <div class="letter-box">A</div>
-                    <div class="letter-box">A</div>
-                    <div class="letter-box">A</div>
-                    <div class="letter-box">A</div>
-                    <div class="letter-box">A</div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- -- -- -- -- -- GAME PROGRESS BARS FORM -- -- -- -- -- -- -->
-        <div class="container mt-3">
-            <div class="row p-1">
-                <div class="col">
-                    <label for="word-progress">Word Progress: </label>
-                    <div class="progress">
-                        <div id="word-progress" class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            <!-- -- -- -- -- -- GAME PROGRESS BARS FORM -- -- -- -- -- -- -->
+            <div class="container mt-3">
+                <div class="row p-1">
+                    <div class="col">
+                        <label for="word-progress">Word Progress: </label>
+                        <div class="progress">
+                            <div id="word-progress" class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="container">
-            <div class="row p-1">
-                <div class="col">
-                    <label for="man-progress">Man Progress: </label>
-                    <div class="progress">
-                        <div id="man-progress" class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="container">
+                <div class="row p-1">
+                    <div class="col">
+                        <label for="man-progress">Man Progress: </label>
+                        <div class="progress">
+                            <div id="man-progress" class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </div> <!-- row - game window -->
+        </div> <!-- row - game window -->
 
+    </div>
 </div>
 
 <footer class="p-3 mt-5 text-center">
-    <small>© 2020 Copyright: </small><a href="https://cinderscript.azurewebsites.net/"> Gregory Maynard</a>
+    <small>© 2021 Copyright: </small><a href="https://cinderscript.azurewebsites.net/"> Gregory Maynard</a>
 </footer>
 
 <!-- Option 1: Bootstrap Bundle with Popper -->

@@ -1,3 +1,14 @@
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.page-content {
+    flex: 1 0 auto;
+}
+
 #game-window{
     border: rgb(147, 210, 255) 2px solid;
     padding-bottom: 15px !important;
