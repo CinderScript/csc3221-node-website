@@ -40,7 +40,8 @@
     margin:auto;
 }
 
-pre{
-    font-family:monospace,monospace;
-    font-size:1em;
+#gallows-container pre{
+    font-size:1.3em;
+    line-height:normal;
+
 }
