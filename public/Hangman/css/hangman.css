@@ -45,3 +45,12 @@
     line-height:normal;
 
 }
+
+
+footer{
+    background-color: whitesmoke;
+}
+footer a{
+    text-decoration: none;
+    margin-left: 6px;
+}
