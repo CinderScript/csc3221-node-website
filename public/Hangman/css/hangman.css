@@ -1,19 +1,20 @@
 #game-window{
     border: dodgerblue 2px solid;
+    padding-bottom: 15px !important;
 }
 
 .game-controls{
     background-color: aliceblue;
     height: 400px;
     padding: 15px;
-    margin: 0px 15px 0px 15px;
+    margin: 15px;
 }
 
 .game-output{
     background-color: azure;
     height: 100%;
     padding: 15px;
-    margin: 0px 15px 0px 15px;
+    margin: 15px;
 }
 
 #kick-image{
@@ -22,4 +23,8 @@
 
 .row{
     padding: 15px 0px;
+}
+
+#game-window label{
+    width: 160px;
 }

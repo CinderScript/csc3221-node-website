@@ -14,70 +14,9 @@
 
     <!-- CSS STYLES -->
     <link rel="stylesheet" href="../stylesheets/style.css">
-    <link rel="stylesheet" href="../stylesheets/hangman.css">
+    <link rel="stylesheet" href="css/hangman.css">
 
-    <script>
-        let gameWindow;
-        let wordProgress;
-        let manProgress;
-
-        // Get elements and set event handlers
-        document.addEventListener("DOMContentLoaded", () => {
-
-            document.getElementById("play-btn").onclick = Run;
-            document.getElementById("guess-btn").onclick = Guess;
-
-            gameWindow = document.getElementById("game-window");
-            wordProgress = document.getElementById("word-progress");
-            manProgress = document.getElementById("man-progress")
-        });
-
-        // used for easier to read waiting intervals/timeouts (async style code)
-        function Sleep(ms) {
-            return new Promise( callback => setTimeout(callback, ms));
-        }
-
-
-        function Guess(){
-            SetProgress( wordProgress, 80);
-            SetProgress( manProgress, 20);
-        }
-
-        function Run(){
-
-            if (gameWindow.classList.contains("d-none"))
-                gameWindow.classList.remove("d-none");
-            else
-                gameWindow.classList.add("d-none");
-        }
-
-        async function SetProgress(bar, value){
-            // temporarily animate the bar
-            bar.classList.add("progress-bar-animated");
-
-            // flash the progress bar
-            let flashCount = 6;
-            let interval = 120;
-            for (let i = 0; i < flashCount; i++){
-                if (bar.classList.contains("d-none"))
-                    bar.classList.remove("d-none");
-                else
-                    bar.classList.add("d-none");
-
-                await Sleep(interval);
-            }
-
-            // set the bar's new value
-            bar.style.width = value+"%";
-            bar.setAttribute("aria-valuenow", value);
-            bar.innerText = value+"%";
-
-            // stop the animation after a pause
-            await Sleep(3000);
-            bar.classList.remove("progress-bar-animated");
-        }
-    </script>
-
+    <script src="scripts/hangman.js"></script>
 </head>
 <body>
 <nav>
@@ -93,7 +32,7 @@
         <div class="col-md-6">
             <h1 class="display-4">This...</h1>
             <h1 class="display-4">Is...</h1>
-            <h1 class="display-2">H A N G M A N!!!!</h1>
+            <h1 class="display-2">H-A-N-G-M-A-N!!!!</h1>
         </div>
         <div class="col-md-6">
             <img id="kick-image" src="https://thumbs.dreamstime.com/b/sparta-d-render-work-path-34577790.jpg" alt="Sparta Kick">
@@ -106,32 +45,66 @@
         </p>
     </div> <!-- row -->
 
-    <div id="game-window" class="row">
+    <div id="game-window" class="row p-0">
         <div class="col-md-6 p-0">
             <div class="game-controls">
+                <!-- -- -- -- -- -- GAME CONTROLS FORM -- -- -- -- -- -- -->
+                <label for="categories" class="form-label">Choose a category: </label>
+                <select name="categories" id="categories"><!-- populated by js --></select> <br>
+
+
+                <div class="form-floating mb-3">
+                    <input type="number" name="word-letters-max" id="word-letters-max" class="form-control" placeholder="text">
+                    <label for="word-letters-max">Max Letters</label>
+                    <div class="form-text">Maximum number of letters in hangman word.</div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="number" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Letter Cap</label>
+                    <div class="form-text">Maximum number of letters in hangman word.</div>
+                </div>
+
                 <button id="guess-btn" type="button" class="btn btn-primary">Guess</button>
             </div>
         </div>
         <div class="col-md-6 p-0">
             <div class="game-output">
                 <p>happy days</p>
+                <p>happy days</p>
+                <p>happy days</p>
+                <p>happy days</p>
+                <p>happy days</p>
+                <p>happy days</p>
+                <p>happy days</p>
+                <p>happy days</p>
             </div>
         </div>
 
-        <div class="col-md-12">
-            <label class="mt-2" for="word-progress">Game Progress: </label>
-            <div class="progress">
-                <div id="word-progress" class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        <!-- -- -- -- -- -- GAME PROGRESS BARS FORM -- -- -- -- -- -- -->
+        <div class="container mt-3">
+            <div class="row p-1">
+                <div class="col">
+                    <label for="word-progress">Word Progress: </label>
+                    <div class="progress">
+                        <div id="word-progress" class="progress-bar progress-bar-striped" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="col-md-12">
-            <label class="mt-2" for="man-progress">Game Progress: </label>
-            <div class="progress">
-                <div id="man-progress" class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="container">
+            <div class="row p-1">
+                <div class="col">
+                    <label for="man-progress">Man Progress: </label>
+                    <div class="progress">
+                        <div id="man-progress" class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div> <!-- row -->
+
+    </div> <!-- row - game window -->
 
 </div>
 

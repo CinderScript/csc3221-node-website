@@ -23,6 +23,7 @@ nav .active{
 }
 nav a:hover{
   background-color: #2a4a58;
+  color: white;
 }
 
 .content{
