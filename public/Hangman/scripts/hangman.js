@@ -1,9 +1,16 @@
-let theChosenWord = "unselected"
-let gameWindow;
+// html elements
 let wordProgress;
 let manProgress;
-let categoriesDropdown;
 let gallowsDisplay;
+
+// inputs
+let categoriesDropdown;
+let maxLettersInput;
+let wordGuessInput;
+let letterGuessInput;
+
+let theChosenWord = "unselected"
+
 
 // INITIALIZATION - GET ELEMENTS, SET HANDLERS, POPULATE DROP DOWN
 document.addEventListener("DOMContentLoaded", () => {
@@ -14,11 +21,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("guess-word-btn").onclick = GuessWord;
 
     // get page elements
-    gameWindow = document.getElementById("game-window");
     wordProgress = document.getElementById("word-progress");
     manProgress = document.getElementById("man-progress");
-    categoriesDropdown = document.getElementById("word-categories");
     gallowsDisplay = document.getElementById("gallows");
+
+    categoriesDropdown = document.getElementById("word-categories");
+    maxLettersInput = document.getElementById("word-letters-max");
+    wordGuessInput = document.getElementById("word-guess");
+    letterGuessInput = document.getElementById("letter-guess");
 
     // write each category name from the json object to the select element's options
     for (const wordGroup of wordBank){
@@ -37,10 +47,11 @@ function Play(){
     // find words in the selected catagory
     for ( const wordGroup of wordBank )
         if ( wordGroup.category === categoriesDropdown.value)
-            possibleWords = wordGroup.words;
+            possibleWords = [...wordGroup.words];
 
     // select only the words with correct number of letters
-    
+    FilterWordsBySize(possibleWords, maxLettersInput.value);
+    alert(JSON.stringify(possibleWords));
 
     let length = possibleWords.length;
     let randomIndex = Math.floor(Math.random() * length)
@@ -90,6 +101,14 @@ function Sleep(ms) {
     return new Promise( callback => setTimeout(callback, ms));
 }
 
+function FilterWordsBySize(words, sizeCap){
+    for (let i = 0; i < words.length; i++) {
+        if (words[i].length > sizeCap){
+            words.splice(i, 1);                         // remove the current element if too big
+            return FilterWordsBySize(words, sizeCap);   // do it again...
+        }
+    }
+}
 
 let wordBank =
     [
