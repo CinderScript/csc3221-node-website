@@ -36,6 +36,11 @@
     background-color: aliceblue;
 }
 
-#gallows{
-    text-align: center;
+#gallows-container{
+    margin:auto;
+}
+
+pre{
+    font-family:monospace,monospace;
+    font-size:1em;
 }

@@ -2,6 +2,7 @@ let gameWindow;
 let wordProgress;
 let manProgress;
 let categories;
+let gallows;
 
 // INITIALIZATION - GET ELEMENTS, SET HANDLERS, POPULATE DROP DOWN
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     wordProgress = document.getElementById("word-progress");
     manProgress = document.getElementById("man-progress");
     categories = document.getElementById("word-categories");
+    gallows = document.getElementById("gallows");
 
     // write each category name from the json object to the select element's options
     for (const wordGroup of wordBank){
@@ -21,6 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
         option.textContent = wordGroup.category;
         categories.appendChild(option);
     }
+
+    // draw gallows
+    gallows.innerText = hangmanASCII;
 });
 
 function Play(){
@@ -36,6 +41,7 @@ function GuessLetter(){
     SetProgress( manProgress, 20);
 }
 
+// sets the given progress bar to the correct value
 async function SetProgress(bar, value){
 
     // temporarily animate the bar
@@ -68,9 +74,26 @@ function Sleep(ms) {
     return new Promise( callback => setTimeout(callback, ms));
 }
 
+
 let wordBank =
     [
         {"category": "Animal", "words": ["dog", "cat", "mouse", "rabbit", "horse", "anaconda", "ox", "tardigrade", "turtle", "bear"]},
         {"category": "Fruit", "words": ["apple", "pear", "fig", "grape", "watermelon", "strawberry", "persimmon", "cherimoya", "plumb", "avacado"]},
         {"category": "State Of Mind", "words": ["fearful", "happy", "sad", "mad", "indecisive", "content", "agitated", "confused", "twitterpated", "convinced", "terrified"]}
     ];
+
+
+let hangmanASCII = "" +
+    "        +======\\\\===+==\n" +
+    "           §    \\  ||\n" +
+    "           §     \\ ||\n" +
+    "           šO     \\||\n" +
+    "          /|\\      ||\n" +
+    "           |       ||\n" +
+    "         _/ \\_     ||\n" +
+    "===++===      /====++=========\n" +
+    "  \\||/       /          \\||/\n" +
+    "   ||       /            ||\n" +
+    "   ||                    ||\n" +
+    "  /||\\                  /||\\\n" +
+    "==####=^^======^====^^^=####===";
