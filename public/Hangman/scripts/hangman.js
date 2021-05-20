@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     gameWindow = document.getElementById("game-window");
     wordProgress = document.getElementById("word-progress");
     manProgress = document.getElementById("man-progress");
+    categories = document.getElementById("word-categories");
 });
 
 // used for easier to read waiting intervals/timeouts (async style code)
