@@ -24,16 +24,18 @@
 .row{
     padding: 15px 0px;
 }
-.letter-box{
-    height: 25px;
-    width: 20px;
-    border-bottom: darkblue 1px solid;
-    text-align: center;
-    margin: 4px;
-}
 
 #word-container{
     background-color: aliceblue;
+}
+
+.letter-box{
+    margin: 4px;
+    height: 43px;
+    width: 23px;
+    border-bottom: darkblue 1px solid;
+    text-align: center;
+    font-size: 2em;
 }
 
 #gallows-container{
