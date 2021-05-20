@@ -2,6 +2,7 @@
 let wordProgress;
 let manProgress;
 let gallowsDisplay;
+let letterBoxes;
 
 // inputs
 let categoriesDropdown;
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     wordProgress = document.getElementById("word-progress");
     manProgress = document.getElementById("man-progress");
     gallowsDisplay = document.getElementById("gallows");
+    letterBoxes = document.getElementById("word-container").getElementsByClassName("letter-box");
 
     categoriesDropdown = document.getElementById("word-categories");
     maxLettersInput = document.getElementById("word-letters-max");
@@ -42,6 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     gallowsDisplay.innerText = hangmanASCII;
 });
 
+// gameplay settup.  Choose word show letter positions
 function Play(){
     let possibleWords;
     // find words in the selected catagory
@@ -51,11 +54,13 @@ function Play(){
 
     // select only the words with correct number of letters
     FilterWordsBySize(possibleWords, maxLettersInput.value);
-    alert(JSON.stringify(possibleWords));
 
     let length = possibleWords.length;
     let randomIndex = Math.floor(Math.random() * length)
     theChosenWord = possibleWords[randomIndex];
+
+    // initialize the word letter boxes
+    ShowNLetterboxes(theChosenWord.length);
 }
 
 function GuessLetter(){
@@ -66,6 +71,15 @@ function GuessLetter(){
 function GuessWord(){
     SetProgress( wordProgress, 80);
     SetProgress( manProgress, 20);
+}
+
+
+function ShowNLetterboxes(n){
+    let boxesToRemove = letterBoxes.length - n;
+
+    for (let i = 0; i < boxesToRemove; i++) {
+        letterBoxes[i].classList.add("d-none");
+    }
 }
 
 // sets the given progress bar to the correct value
