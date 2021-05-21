@@ -80,3 +80,26 @@ footer a{
     text-decoration: none;
     margin-left: 6px;
 }
+
+nav{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    font-family: 'Noto Sans', sans-serif;
+}
+nav a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    float: left;
+}
+nav .active{
+    background-color: #007563;
+}
+nav a:hover{
+    background-color: #2a4a58;
+    color: white;
+}
