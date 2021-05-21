@@ -122,8 +122,12 @@ let letterGuessBtn = document.getElementById("guess-letter-btn");
 let wordGuessBtn = document.getElementById("guess-word-btn");
 
 // gameplay vars
-
 let hangman;
+var playSound = new Audio("http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/pause.wav");
+var looseSound = new Audio("http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/theygotcha.ogg");
+var incorrectSound = new Audio("https://rpg.hamsterrepublic.com/wiki-images/d/d7/Oddbounce.ogg");
+var correctSound = new Audio("http://codeskulptor-demos.commondatastorage.googleapis.com/descent/gotitem.mp3");
+
 
 // * * * * * * * * PAGE INITIALIZATION * * * * * * * * *//
 
@@ -204,6 +208,9 @@ function Play(){
 
     // draw gallows
     Flash(gallowsDisplay, GetRenderedMan(0), GetRenderedMan(6), 5, 150);
+
+    // sound effect
+    playSound.play();
 }
 
 function GuessLetter(){
@@ -224,13 +231,15 @@ function GuessLetter(){
     }
 
     // update the display boxes and progress bars
-    if ( hangman.GuessLetter(letter) ){
+    if ( hangman.GuessLetter(letter) ){             // if correct letter
         UpdateLetterboxLetters();
         SetProgress(wordProgress, hangman.wordPercentComplete);
+        correctSound.play();
     }
-    else {
+    else {                                          // else incorrect letter
         SetProgress(manProgress, hangman.guessPercentUsed);
         guessRemainingCountElement.innerText = hangman.incorrectLimit - hangman.incorrectCount;
+        incorrectSound.play();
     }
 
     // update the guess history display
@@ -261,10 +270,14 @@ function GuessWord(){
     }
 
     // is word correct?
-    if ( hangman.GuessWord(word) )
-      playerWon();
-    else
+    if ( hangman.GuessWord(word) ){
+        playerWon();
+        correctSound.play();
+    }
+    else {
         playerLost();
+        incorrectSound.play();
+    }
 }
 
 
@@ -275,13 +288,13 @@ function playerWon(){
     UpdateLetterboxLetters();
     // give message after progress bar finishes
     SetProgress( wordProgress, 100);
-    setTimeout(()=> {alert("You Chose Correctly!  You Win!")}, 1500 )
+    setTimeout(()=> {alert("You Chose Correctly!  You Win!")}, 700 )
 }
 function playerLost(){
     DisableGuessBtns();
     // give message after progress bar finishes
     SetProgress( manProgress, 100);
-    setTimeout(()=> {alert("You Lost! Try again...")}, 1500 )
+    setTimeout(()=> {alert("You Lost! Try again...")}, 700 )
 }
 
 function SetLetterboxVisibility(numberVisible){
