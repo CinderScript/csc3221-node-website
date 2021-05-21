@@ -127,6 +127,10 @@ var playSound = new Audio("http://codeskulptor-demos.commondatastorage.googleapi
 var incorrectSound = new Audio("https://rpg.hamsterrepublic.com/wiki-images/d/d7/Oddbounce.ogg");
 var correctSound = new Audio("http://codeskulptor-demos.commondatastorage.googleapis.com/descent/gotitem.mp3");
 
+playSound.volume = 0.8;
+incorrectSound.volume = 0.7;
+correctSound.volume = 0.7;
+
 
 // * * * * * * * * PAGE INITIALIZATION * * * * * * * * *//
 
@@ -233,6 +237,7 @@ function GuessLetter(){
     if ( hangman.GuessLetter(letter) ){             // if correct letter
         UpdateLetterboxLetters();
         SetProgress(wordProgress, hangman.wordPercentComplete);
+        correctSound.currentTime = 0; // long sound - so restart for next play
         correctSound.play();
     }
     else {                                          // else incorrect letter
@@ -252,11 +257,11 @@ function GuessLetter(){
         guessRemainingCountElement.innerText = 0;
         playerLost();
     }
-    else {
-        // update gallows
-        let renderedCurrentMan = GetRenderedMan(hangman.incorrectCount);
-        Flash(gallowsDisplay, renderedCurrentMan, GetRenderedMan(0));
-    }
+
+    // update gallows
+    let renderedCurrentMan = GetRenderedMan(hangman.incorrectCount);
+    Flash(gallowsDisplay, renderedCurrentMan, GetRenderedMan(0));
+
 }
 
 function GuessWord(){
