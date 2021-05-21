@@ -36,18 +36,6 @@ body {
     padding: 15px 0px;
 }
 
-#word-container{
-    background-color: aliceblue;
-}
-
-.letter-box{
-    margin: 4px;
-    height: 43px;
-    width: 23px;
-    border-bottom: darkblue 1px solid;
-    text-align: center;
-    font-size: 2em;
-}
 
 #gallows-container{
     margin:auto;
@@ -59,6 +47,21 @@ body {
 
 }
 
+#word-container{
+    background-color: aliceblue;
+}
+
+.letter-box{
+    height: 43px;
+    width: 23px;
+    border-bottom: darkblue 1px solid;
+    text-align: center;
+    font-size: 2em;
+}
+#word-container .spacer{
+    max-width: 25px;
+    flex-grow: 1;
+}
 
 footer{
     background-color: whitesmoke;

@@ -6,6 +6,7 @@ let wordProgress;
 let manProgress;
 let gallowsDisplay;
 let letterBoxes;
+let letterBoxSpacers;
 
 // inputs
 let categoriesDropdown;
@@ -36,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     manProgress = document.getElementById("man-progress");
     gallowsDisplay = document.getElementById("gallows");
     letterBoxes = document.getElementById("word-container").getElementsByClassName("letter-box");
+    letterBoxSpacers = document.getElementById("word-container").getElementsByClassName("spacer");
 
     categoriesDropdown = document.getElementById("word-categories");
     maxLettersInput = document.getElementById("word-letters-max");
@@ -156,6 +158,7 @@ async function GuessWord(){
 
 function SetLetterboxVisibility(numberVisible){
     let boxesToRemove = letterBoxes.length - numberVisible;
+    let spacersToRemove = boxesToRemove;
 
     // set visibility (display) for each box
     for (let i = 0; i < letterBoxes.length; i++) {
@@ -163,6 +166,14 @@ function SetLetterboxVisibility(numberVisible){
             letterBoxes[i].classList.add("d-none");
         else
             letterBoxes[i].classList.remove("d-none");
+    }
+
+    // set visibility (display) for each spacer
+    for (let i = 0; i < letterBoxSpacers.length; i++) {
+        if (i < spacersToRemove)
+            letterBoxSpacers[i].classList.add("d-none");
+        else
+            letterBoxSpacers[i].classList.remove("d-none");
     }
 }
 
@@ -220,7 +231,7 @@ function UpdateLetterboxLetters(guessedLetters){
         for (const hangIndex in theHangmanWord)
             if (theHangmanWord[hangIndex] == guess)
                 visibleBoxes[hangIndex].innerText = theHangmanWord[hangIndex].toUpperCase();
-        
+
 
     }
 }
