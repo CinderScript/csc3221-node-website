@@ -1,4 +1,58 @@
 
+class HangmanWord{
+    constructor(word, guessLimit = 6) {
+        this._word = word.toUpperCase();
+        this._hangmanLetters = [...word];
+        this._guesses = [];
+        const _guessLimit = guessLimit;
+
+        // clear hangman letters
+        for (const i in this._hangmanLetters) {
+            this._hangmanLetters[i] = " ";
+        }
+    }
+
+    get word(){
+        return this._word;
+    }
+    get hangmanLetters(){
+        return [...this._hangmanLetters];
+    }
+    get guesses(){
+        return [...this._guesses]
+    }
+    get guessLimit(){
+        return this._guessLimit;
+    }
+
+    GuessLetter(letter) {
+        this._guesses.push(letter.toLowerCase());
+
+        // if the letter is in the word
+        if ( this._word.indexOf( letter.toUpperCase() ) != -1 ){
+            // add letter to hangman letters
+            for (let i = 0; i < this._word.length; i++) {
+                if (letter.toUpperCase() == this._word[i])
+                    this._hangmanLetters[i] = letter.toUpperCase();
+            }
+            return true;
+        }
+        else
+            return false;
+    }
+
+    GuessWord(word){
+        if (word.toUpperCase() == this._word){
+            for (const char in this._word) {
+                this._hangmanLetters[char] = this._word[char];
+            }
+            return true;
+        }
+        else
+            return false;
+    }
+}
+
 // * * * * * * * * VARS * * * * * * * * *//
 
 // html elements
@@ -19,10 +73,8 @@ let letterGuessBtn = document.getElementById("guess-letter-btn");
 let wordGuessBtn = document.getElementById("guess-word-btn");
 
 // gameplay vars
-const MAXIMUM_GUESSES = 6;
-let theHangmanWord = "unselected";
-let guessedLetters = [];
 
+let hangman;
 
 // * * * * * * * * PAGE INITIALIZATION * * * * * * * * *//
 
@@ -84,37 +136,40 @@ function Play(){
     // randomly choose one of those words
     let length = possibleWords.length;
     let randomIndex = Math.floor(Math.random() * length)
-    theHangmanWord = possibleWords[randomIndex];
+    let chosenWord = possibleWords[randomIndex];
 
-    alert(theHangmanWord);
+    alert(chosenWord);
 
     // initialize the word letter boxes
-    SetLetterboxVisibility(theHangmanWord.length);
+    SetLetterboxVisibility(chosenWord.length);
 
     // reset the game
+    hangman = new HangmanWord(chosenWord);
     let guessedLetters = [];
     EnableGuessBtns();
     letterGuessInput.value = "";
     wordGuessInput.value = "";
+    SetProgress(manProgress, 0);
+    SetProgress(wordProgress, 0)
 }
 
 async function GuessLetter(){
-
+    let correct = false;
     let letter = letterGuessInput.value;
-    guessedLetters.push(letter);
+    letterGuessInput.value = "";            //clear old input
 
     // early out
     if ( isEmptyOrWhitespace(letter) ){
         alert("To guess a word, you must enter a value.\nTry again.");
         return;
     }
-    // if letter is correct, update the letter boxes
-    for (const char of theHangmanWord)
-        if (char == letter)
-            UpdateLetterboxLetters(guessedLetters);
 
-    // clear old input
-    letterGuessInput.value = "";
+    if ( hangman.GuessLetter(letter) ){
+        UpdateLetterboxLetters();
+
+        // calculate progress
+
+    }
 }
 
 async function GuessWord(){
@@ -128,7 +183,8 @@ async function GuessWord(){
     }
 
     // is word correct?
-    if ( isWordCorrect() ){
+    if ( hangman.GuessWord(word) ){
+        UpdateLetterboxLetters();
         await SetProgress( wordProgress, 100);
         alert("You guessed the word correctly!  You Win!"); // give win message after progress bar finishes
     }
@@ -139,10 +195,6 @@ async function GuessWord(){
     }
 
     DisableGuessBtns();
-
-    function isWordCorrect(){
-        return word.toUpperCase() == theHangmanWord.toUpperCase();
-    }
 }
 
 
@@ -209,23 +261,16 @@ async function SetProgress(bar, value){
     });
 }
 
-function UpdateLetterboxLetters(guessedLetters){
+function UpdateLetterboxLetters(){
     // get boxes that are visible
     let visibleBoxes = [];
     for (var letterBox of letterBoxes)
         if ( !letterBox.classList.contains("d-none") )
             visibleBoxes.push(letterBox);
 
-    // for each letter that was guessed, find it's position in the hangman word
-    for (const letterIndex in guessedLetters) {
-        let guess = guessedLetters[letterIndex];
-
-        // find each match in hangman word
-        for (const hangIndex in theHangmanWord)
-            if (theHangmanWord[hangIndex] == guess)
-                visibleBoxes[hangIndex].innerText = theHangmanWord[hangIndex].toUpperCase();
-
-
+    // match hangman letters to the page letter boxes
+    for (const box in visibleBoxes) {
+        visibleBoxes[box].innerText = hangman.hangmanLetters[box];
     }
 }
 
