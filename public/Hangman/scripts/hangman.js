@@ -7,7 +7,7 @@
 *
 */
 class HangmanWord{
-    constructor(word, incorrectLimit = 6) {
+    constructor(word, incorrectLimit = 5) {
         this._word = word.toUpperCase();
         this._hangmanLetters = [...word];
         this._guesses = [];
@@ -63,7 +63,7 @@ class HangmanWord{
      * @returns {number} percent used.
      */
     get guessPercentUsed(){
-        return Math.ceil( (this.incorrectCount / this.incorrectLimit) * 100 );
+        return Math.ceil( (this.incorrectCount / (this.incorrectLimit+1)) * 100 );
     }
 
     GuessLetter(letter) {
@@ -201,7 +201,9 @@ function Play(){
     letterGuessInput.value = "";
     wordGuessInput.value = "";
     SetProgress(manProgress, 0);
-    SetProgress(wordProgress, 0)
+    SetProgress(wordProgress, 0);
+    guessHistory.innerText = "";
+    guessRemainingCountElement.innerText = 5;
 }
 
 async function GuessLetter(){
@@ -238,8 +240,10 @@ async function GuessLetter(){
     if (hangman.playerWon)
         playerWon();
 
-    if (hangman.playerLost)
+    if (hangman.playerLost) {
+        guessRemainingCountElement.innerText = 0;
         playerLost();
+    }
 }
 
 async function GuessWord(){
@@ -281,10 +285,14 @@ function SetLetterboxVisibility(numberVisible){
 
     // set visibility (display) for each box
     for (let i = 0; i < letterBoxes.length; i++) {
-        if (i < boxesToRemove)
+        if (i < boxesToRemove){
             letterBoxes[i].classList.add("d-none");
-        else
+            letterBoxes[i].innerText = " ";
+        }
+        else {
             letterBoxes[i].classList.remove("d-none");
+            letterBoxes[i].innerText = " ";
+        }
     }
 
     // set visibility (display) for each spacer
