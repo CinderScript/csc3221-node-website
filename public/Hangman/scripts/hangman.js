@@ -1,8 +1,3 @@
-// * * * * * * * * CLASSES * * * * * * * * *//
-
-
-
-
 
 // * * * * * * * * VARS * * * * * * * * *//
 
@@ -18,8 +13,13 @@ let maxLettersInput;
 let wordGuessInput;
 let letterGuessInput;
 
-// word to guess
+// buttons
+let letterGuessBtn = document.getElementById("guess-letter-btn");
+let wordGuessBtn = document.getElementById("guess-word-btn");
+
+// gameplay vars
 let theChosenWord = "unselected"
+let guessedLetters = [];
 
 
 // * * * * * * * * PAGE INITIALIZATION * * * * * * * * *//
@@ -28,12 +28,9 @@ let theChosenWord = "unselected"
 // assign page element vars, assign event handlers, popuate html content
 document.addEventListener("DOMContentLoaded", () => {
 
-    //settup button handlers
-    document.getElementById("play-btn").onclick = Play;
-    document.getElementById("guess-letter-btn").onclick = GuessLetter;
-    document.getElementById("guess-word-btn").onclick = GuessWord;
-
     // get page elements
+    letterGuessBtn = document.getElementById("guess-letter-btn");
+    wordGuessBtn = document.getElementById("guess-word-btn");
     wordProgress = document.getElementById("word-progress");
     manProgress = document.getElementById("man-progress");
     gallowsDisplay = document.getElementById("gallows");
@@ -44,7 +41,13 @@ document.addEventListener("DOMContentLoaded", () => {
     wordGuessInput = document.getElementById("word-guess");
     letterGuessInput = document.getElementById("letter-guess");
 
-    // write each category name from the json object to the select element's options
+    //settup button handlers
+    document.getElementById("play-btn").onclick = Play;
+    letterGuessBtn.onclick = GuessLetter;
+    wordGuessBtn.onclick = GuessWord;
+
+
+    // POPULATE CATEGORIES DROP DOWN
     for (const wordGroup of wordBank){
         option = document.createElement("option");
         option.value = wordGroup.category;
@@ -54,6 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // draw gallows
     gallowsDisplay.innerText = hangmanASCII;
+
+    // set gamestate
+    DisableGuessBtns();
 });
 
 
@@ -77,64 +83,115 @@ function Play(){
     let randomIndex = Math.floor(Math.random() * length)
     theChosenWord = possibleWords[randomIndex];
 
+    alert(theChosenWord);
+
     // initialize the word letter boxes
-    ShowNLetterboxes(theChosenWord.length);
+    SetLetterboxVisibility(theChosenWord.length);
+
+    // reset the game
+    let guessedLetters = [];
+    EnableGuessBtns();
 }
 
-function GuessLetter(){
-    SetProgress( wordProgress, 80);
-    SetProgress( manProgress, 20);
+async function GuessLetter(){
+
+    if ( letterGuessInput.value == "")
+
+    function isLetterCorrect(){
+        return true;
+    }
 }
 
-function GuessWord(){
-    SetProgress( wordProgress, 80);
-    SetProgress( manProgress, 20);
+async function GuessWord(){
+
+    // is word correct?
+    if ( isWordCorrect() ){
+        await SetProgress( wordProgress, 100);
+        alert("You guessed the word correctly!  You Win!"); // give win message after progress bar finishes
+    }
+    else
+    {
+        await SetProgress( manProgress, 100);
+        alert("Your word guess was incorrect. You Lose! Try again..."); // give win message after progress bar finishes
+    }
+
+    DisableGuessBtns();
+
+    function isWordCorrect(){
+        return wordGuessInput.value.toUpperCase() == theChosenWord.toUpperCase();
+    }
 }
 
 
 // * * * * * * * * html element updaters * * * * * * * * *//
 
 
-function ShowNLetterboxes(n){
-    let boxesToRemove = letterBoxes.length - n;
+function SetLetterboxVisibility(numberVisible){
+    let boxesToRemove = letterBoxes.length - numberVisible;
 
-    // remove uneeded letter boxes
-    for (let i = 0; i < boxesToRemove; i++) {
-        letterBoxes[i].classList.add("d-none");
+    // set visibility (display) for each box
+    for (let i = 0; i < letterBoxes.length; i++) {
+        if (i < boxesToRemove)
+            letterBoxes[i].classList.add("d-none");
+        else
+            letterBoxes[i].classList.remove("d-none");
     }
 }
 
 // sets the given progress bar to the correct value
 async function SetProgress(bar, value){
 
-    // temporarily animate the bar
-    bar.classList.add("progress-bar-animated");
+    // we don't want to wait for this function to finish the animation, so
+    // put code this animation in a timeout callback
+    setTimeout( async ()=>{
+        // set the bar's new value
+        bar.style.width = value+"%";
+        bar.setAttribute("aria-valuenow", value);
+        bar.innerText = value+"%";
 
-    // flash the progress bar
-    let flashCount = 6;
-    let interval = 120;
-    for (let i = 0; i < flashCount; i++){
-        if (bar.classList.contains("d-none"))
-            bar.classList.remove("d-none");
-        else
-            bar.classList.add("d-none");
+        // stop the animation after a pause
+        await Sleep(2000);
+        bar.classList.remove("progress-bar-animated");
 
-        await Sleep(interval);
-    }
+    }, 0 );
 
-    // set the bar's new value
-    bar.style.width = value+"%";
-    bar.setAttribute("aria-valuenow", value);
-    bar.innerText = value+"%";
+    // make awaitable
+    return new Promise(async resolve => {
+        // temporarily animate the bar
+        bar.classList.add("progress-bar-animated");
 
-    // stop the animation after a pause
-    await Sleep(3000);
-    bar.classList.remove("progress-bar-animated");
+        // flash the progress bar
+        let flashCount = 6;
+        let interval = 120;
+        for (let i = 0; i < flashCount; i++){
+            if (bar.classList.contains("d-none"))
+                bar.classList.remove("d-none");
+            else
+                bar.classList.add("d-none");
+
+            // pause before next itteration
+            await Sleep(interval);
+        }
+
+        resolve("resolved");
+    });
+}
+
+function DisableGuessBtns(){
+    wordGuessBtn.setAttribute("disabled", "disabled");
+    letterGuessBtn.setAttribute("disabled", "disabled");
+}
+function EnableGuessBtns(){
+    wordGuessBtn.removeAttribute("disabled");
+    letterGuessBtn.removeAttribute("disabled");
 }
 
 
 // * * * * * * * * helper functions * * * * * * * * *//
 
+function isEmptyOrWhitespace{
+    var regex = /^\s*$/;
+}
 
 // used for easier to read waiting intervals/timeouts (async style code)
 function Sleep(ms) {
@@ -150,9 +207,7 @@ function FilterWordsBySize(words, sizeCap){
     }
 }
 
-
 // * * * * * * * * DATA * * * * * * * * *//
-
 
 let wordBank =
     [
