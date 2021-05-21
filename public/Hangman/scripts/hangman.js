@@ -18,7 +18,8 @@ let letterGuessBtn = document.getElementById("guess-letter-btn");
 let wordGuessBtn = document.getElementById("guess-word-btn");
 
 // gameplay vars
-let theChosenWord = "unselected"
+const MAXIMUM_GUESSES = 6;
+let theHangmanWord = "unselected";
 let guessedLetters = [];
 
 
@@ -81,28 +82,55 @@ function Play(){
     // randomly choose one of those words
     let length = possibleWords.length;
     let randomIndex = Math.floor(Math.random() * length)
-    theChosenWord = possibleWords[randomIndex];
+    theHangmanWord = possibleWords[randomIndex];
 
-    alert(theChosenWord);
+    alert(theHangmanWord);
 
     // initialize the word letter boxes
-    SetLetterboxVisibility(theChosenWord.length);
+    SetLetterboxVisibility(theHangmanWord.length);
 
     // reset the game
     let guessedLetters = [];
     EnableGuessBtns();
+    letterGuessInput.value = "";
+    wordGuessInput.value = "";
 }
 
 async function GuessLetter(){
 
-    if ( letterGuessInput.value == "")
+    let letter = letterGuessInput.value;
+    guessedLetters.push(letter);
+
+    // early out
+    if ( isEmptyOrWhitespace(letter) ){
+        alert("To guess a word, you must enter a value.\nTry again.");
+        return;
+    }
+
+    // update letter boxes and guesses
+    if ( isLetterCorrect() ){
+        UpdateLetterboxLetters(guessedLetters);
+    }
+
 
     function isLetterCorrect(){
-        return true;
+        for (const char of theHangmanWord)
+            if (char == letter)
+                return true;
+
+        return false;
     }
 }
 
 async function GuessWord(){
+
+    let word = wordGuessInput.value;
+
+    // early out
+    if ( isEmptyOrWhitespace(word) ){
+        alert("To guess a word, you must enter a value.\nTry again.");
+        return;
+    }
 
     // is word correct?
     if ( isWordCorrect() ){
@@ -118,7 +146,7 @@ async function GuessWord(){
     DisableGuessBtns();
 
     function isWordCorrect(){
-        return wordGuessInput.value.toUpperCase() == theChosenWord.toUpperCase();
+        return word.toUpperCase() == theHangmanWord.toUpperCase();
     }
 }
 
@@ -177,6 +205,26 @@ async function SetProgress(bar, value){
     });
 }
 
+function UpdateLetterboxLetters(guessedLetters){
+    // get boxes that are visible
+    let visibleBoxes = [];
+    for (var letterBox of letterBoxes)
+        if ( !letterBox.classList.contains("d-none") )
+            visibleBoxes.push(letterBox);
+
+    // for each letter that was guessed, find it's position in the hangman word
+    for (const letterIndex in guessedLetters) {
+        let guess = guessedLetters[letterIndex];
+
+        // find each match in hangman word
+        for (const hangIndex in theHangmanWord)
+            if (theHangmanWord[hangIndex] == guess)
+                visibleBoxes[hangIndex].innerText = theHangmanWord[hangIndex].toUpperCase();
+        
+
+    }
+}
+
 function DisableGuessBtns(){
     wordGuessBtn.setAttribute("disabled", "disabled");
     letterGuessBtn.setAttribute("disabled", "disabled");
@@ -189,8 +237,13 @@ function EnableGuessBtns(){
 
 // * * * * * * * * helper functions * * * * * * * * *//
 
-function isEmptyOrWhitespace{
-    var regex = /^\s*$/;
+function isEmptyOrWhitespace(string) {
+    var regex = /^\s*$/; // whitespace
+
+    if ( string.length == 0 || string.replace(regex, '').length == 0)
+        return true;
+    else
+        return false;
 }
 
 // used for easier to read waiting intervals/timeouts (async style code)
@@ -230,4 +283,5 @@ let hangmanASCII = "" +
     "   ||        /           ||\n" +
     "   ||                    ||\n" +
     "  /||\\                  /||\\\n" +
-    "==####=^^======^====^^^=####===";
+    "==####=^^======^====^^^=####===\n" +
+    "                       -picasso";
