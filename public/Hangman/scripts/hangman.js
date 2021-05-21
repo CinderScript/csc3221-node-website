@@ -189,8 +189,6 @@ function Play(){
     let randomIndex = Math.floor(Math.random() * length)
     let chosenWord = possibleWords[randomIndex];
 
-    alert(chosenWord);
-
     // initialize the word letter boxes
     SetLetterboxVisibility(chosenWord.length);
 
@@ -204,6 +202,13 @@ function Play(){
     SetProgress(wordProgress, 0);
     guessHistory.innerText = "";
     guessRemainingCountElement.innerText = 5;
+
+    let stage = 1;
+    for (const part of bodyparts) {
+        if (stage == part.stage)
+            while(hangmanASCII.indexOf( part.bodyNumber ) != -1)
+                hangmanASCII.replaceAll(part.bodyNumber, part.ascii)
+    }
 }
 
 async function GuessLetter(){
@@ -365,6 +370,27 @@ function EnableGuessBtns(){
     letterGuessBtn.removeAttribute("disabled");
 }
 
+function DrawMan(hangman){
+    let incorrectCount = hangman.incorrectCount;
+
+    // let each new incorrect fall-through each case
+    switch (incorrectCount) {
+        case 6:
+
+        case 5:
+
+        case 4:
+
+        case 3:
+
+        case 2:
+
+        case 1:
+
+        case 0:
+    }
+}
+
 
 // * * * * * * * * helper functions * * * * * * * * *//
 
@@ -401,14 +427,28 @@ let wordBank =
     ];
 
 
+/* HANGMAN DRAWING OUTPUT
+        ===§===\\==tt==
+           §    \  ||
+           §     \ ||
+           š()    \||
+          /|\      ||
+           |       ||
+         _/ \_     ||
+========      //===TT=========
+*/
+
+// each of the numbers in the hangman ascii is replaced with
+// the corresponding character depending on the stage
+
 let hangmanASCII = "" +
     "        ===§===\\\\==tt==\n" +
     "           §    \\  ||\n" +
     "           §     \\ ||\n" +
-    "           šO     \\||\n" +
-    "          /|\\      ||\n" +
-    "           |       ||\n" +
-    "         _/ \\_     ||\n" +
+    "           š12    \\||\n" +
+    "          435      ||\n" +
+    "           3       ||\n" +
+    "         67 89     ||\n" +
     "========      //===TT=========\n" +
     "  \\||/        /         \\||/\n" +
     "   ||        /           ||\n" +
@@ -416,3 +456,15 @@ let hangmanASCII = "" +
     "  /||\\                  /||\\\n" +
     "==####=^^======^====^^^=####===\n" +
     "                       -picasso";
+
+let bodyparts = [
+    { stage: 1, bodyNumber : 1,  ascii : '(' },
+    { stage: 1, bodyNumber : 2,  ascii : ')' },
+    { stage: 2, bodyNumber : 3,  ascii : '|' },
+    { stage: 2, bodyNumber : 3,  ascii : '|' },
+    { stage: 3, bodyNumber : 4,  ascii : '/' },
+    { stage: 4, bodyNumber : 5,  ascii : '\\' },
+    { stage: 5, bodyNumber : 6,  ascii : '_' },
+    { stage: 5, bodyNumber : 7,  ascii : '/' },
+    { stage: 6, bodyNumber : 8,  ascii : '|' },
+    { stage: 6, bodyNumber : 9,  ascii : '\\' } ];
