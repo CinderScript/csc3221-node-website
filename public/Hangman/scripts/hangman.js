@@ -161,11 +161,10 @@ document.addEventListener("DOMContentLoaded", () => {
         categoriesDropdown.appendChild(option);
     }
 
-    // draw gallows
-    gallowsDisplay.innerText = hangmanASCII;
-
     // set gamestate
     DisableGuessBtns();
+
+    gallowsDisplay.innerText = GetRenderedMan(0);
 });
 
 
@@ -203,15 +202,11 @@ function Play(){
     guessHistory.innerText = "";
     guessRemainingCountElement.innerText = 5;
 
-    let stage = 1;
-    for (const part of bodyparts) {
-        if (stage == part.stage)
-            while(hangmanASCII.indexOf( part.bodyNumber ) != -1)
-                hangmanASCII.replaceAll(part.bodyNumber, part.ascii)
-    }
+    // draw gallows
+    Flash(gallowsDisplay, GetRenderedMan(0), GetRenderedMan(6), 5, 150);
 }
 
-async function GuessLetter(){
+function GuessLetter(){
     let correct = false;
     let letter = letterGuessInput.value;
     letterGuessInput.value = "";            //clear old input
@@ -241,17 +236,22 @@ async function GuessLetter(){
     // update the guess history display
     guessHistory.innerText = hangman.guesses.join(" ");
 
-    // did the player win or loose?
+    /// WIN OR LOOSE?
+
     if (hangman.playerWon)
         playerWon();
-
-    if (hangman.playerLost) {
+    else if (hangman.playerLost) {
         guessRemainingCountElement.innerText = 0;
         playerLost();
     }
+    else {
+        // update gallows
+        let renderedCurrentMan = GetRenderedMan(hangman.incorrectCount);
+        Flash(gallowsDisplay, renderedCurrentMan, GetRenderedMan(0));
+    }
 }
 
-async function GuessWord(){
+function GuessWord(){
     let word = wordGuessInput.value;
 
     // early out
@@ -270,18 +270,18 @@ async function GuessWord(){
 
 // * * * * * * * * html element updaters * * * * * * * * *//
 
-async function playerWon(){
+function playerWon(){
     DisableGuessBtns();
     UpdateLetterboxLetters();
     // give message after progress bar finishes
-    await SetProgress( wordProgress, 100);
-    alert("You Chose Correctly!  You Win!");
+    SetProgress( wordProgress, 100);
+    setTimeout(()=> {alert("You Chose Correctly!  You Win!")}, 1500 )
 }
-async function playerLost(){
+function playerLost(){
     DisableGuessBtns();
     // give message after progress bar finishes
-    await SetProgress( manProgress, 100);
-    alert("You Lost! Try again...");
+    SetProgress( manProgress, 100);
+    setTimeout(()=> {alert("You Lost! Try again...")}, 1500 )
 }
 
 function SetLetterboxVisibility(numberVisible){
@@ -310,42 +310,20 @@ function SetLetterboxVisibility(numberVisible){
 }
 
 // sets the given progress bar to the correct value
-async function SetProgress(bar, value){
+function SetProgress(bar, value){
 
-    // we don't want to wait for this function to finish the animation, so
-    // put code this animation in a timeout callback
-    setTimeout( async ()=>{
-        // set the bar's new value
-        bar.style.width = value+"%";
-        bar.setAttribute("aria-valuenow", value);
-        bar.innerText = value+"%";
+    // temporarily animate the bar
+    bar.classList.add("progress-bar-animated");
 
-        // stop the animation after a pause
-        await Sleep(2000);
+    // set the bar's new value
+    bar.style.width = value+"%";
+    bar.setAttribute("aria-valuenow", value);
+    bar.innerText = value + "%";
+
+    // stop the animation after a pause
+    setTimeout( () => {
         bar.classList.remove("progress-bar-animated");
-
-    }, 0 );
-
-    // make awaitable
-    return new Promise(async resolve => {
-        // temporarily animate the bar
-        bar.classList.add("progress-bar-animated");
-
-        // flash the progress bar
-        let flashCount = 6;
-        let interval = 120;
-        for (let i = 0; i < flashCount; i++){
-            if (bar.classList.contains("d-none"))
-                bar.classList.remove("d-none");
-            else
-                bar.classList.add("d-none");
-
-            // pause before next itteration
-            await Sleep(interval);
-        }
-
-        resolve("resolved");
-    });
+    }, 2000);
 }
 
 function UpdateLetterboxLetters(){
@@ -370,25 +348,37 @@ function EnableGuessBtns(){
     letterGuessBtn.removeAttribute("disabled");
 }
 
-function DrawMan(hangman){
-    let incorrectCount = hangman.incorrectCount;
-
-    // let each new incorrect fall-through each case
-    switch (incorrectCount) {
-        case 6:
-
-        case 5:
-
-        case 4:
-
-        case 3:
-
-        case 2:
-
-        case 1:
-
-        case 0:
+function GetRenderedMan(stage){
+    let manImage = hangmanASCII;
+    for (const part of bodyparts) {
+        if (part.stage <= stage){
+            manImage = manImage.replaceAll(part.bodyNumber, part.ascii);
+        }
+        else{
+            manImage = manImage.replaceAll(part.bodyNumber, " ");
+        }
     }
+    return manImage;
+}
+
+function Flash(element, stateOn, stateOff, numberOfFlashes = 6, interval = 180){
+    let flashCount = 0;
+    let toggle = true;
+    let flashing = setInterval(()=>{
+        if (toggle)
+            element.innerHTML = stateOn;
+        else
+            element.innerHTML = stateOff;
+
+        toggle = !toggle;
+        flashCount++;
+
+        if (flashCount == numberOfFlashes*2){
+            clearInterval(flashing);
+            element.innerHTML = stateOn;
+        }
+
+    }, interval);
 }
 
 
@@ -401,11 +391,6 @@ function isEmptyOrWhitespace(string) {
         return true;
     else
         return false;
-}
-
-// used for easier to read waiting intervals/timeouts (async style code)
-function Sleep(ms) {
-    return new Promise( callback => setTimeout(callback, ms));
 }
 
 function FilterWordsBySize(words, sizeCap){
@@ -466,5 +451,5 @@ let bodyparts = [
     { stage: 4, bodyNumber : 5,  ascii : '\\' },
     { stage: 5, bodyNumber : 6,  ascii : '_' },
     { stage: 5, bodyNumber : 7,  ascii : '/' },
-    { stage: 6, bodyNumber : 8,  ascii : '|' },
-    { stage: 6, bodyNumber : 9,  ascii : '\\' } ];
+    { stage: 6, bodyNumber : 8,  ascii : '\\' },
+    { stage: 6, bodyNumber : 9,  ascii : '_' } ];
