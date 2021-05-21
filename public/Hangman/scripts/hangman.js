@@ -1,4 +1,11 @@
 
+/*
+*
+*   Hangman class.  Keeps track of the selected word and all of the guesses.
+*   holds an array 'hangmanLetters' as a representation of what should be
+*   displayed to the user as the game progresses.
+*
+*/
 class HangmanWord{
     constructor(word, incorrectLimit = 6) {
         this._word = word.toUpperCase();
@@ -35,9 +42,26 @@ class HangmanWord{
                 count++;
         return count;
     }
+    get playerLost(){
+        return this.guessPercentUsed == 100;
+    }
+    get playerWon(){
+        return this.wordPercentComplete == 100;
+    }
+
+    /**
+     * Gets the percentage of the hangman's word completion.
+     * @returns {number} percent complete.
+     */
     get wordPercentComplete(){
         return Math.ceil( (this.lettersCompleted / this.word.length) * 100 );
     }
+
+    /**
+     * Gets the percentage of the hangman's incorrect guesses that have been
+     * used up.
+     * @returns {number} percent used.
+     */
     get guessPercentUsed(){
         return Math.ceil( (this.incorrectCount / this.incorrectLimit) * 100 );
     }
@@ -193,6 +217,7 @@ async function GuessLetter(){
         return;
     }
 
+    // update the display boxes and progress bars
     if ( hangman.GuessLetter(letter) ){
         UpdateLetterboxLetters();
         SetProgress(wordProgress, hangman.wordPercentComplete);
@@ -200,6 +225,13 @@ async function GuessLetter(){
     else {
         SetProgress(manProgress, hangman.guessPercentUsed);
     }
+
+    // did the player win or loose?
+    if (hangman.playerWon)
+        playerWon();
+
+    if (hangman.playerLost)
+        playerLost();
 }
 
 async function GuessWord(){
@@ -214,22 +246,31 @@ async function GuessWord(){
 
     // is word correct?
     if ( hangman.GuessWord(word) ){
-        UpdateLetterboxLetters();
-        await SetProgress( wordProgress, 100);
-        alert("You guessed the word correctly!  You Win!"); // give win message after progress bar finishes
+      playerWon();
     }
     else
     {
-        await SetProgress( manProgress, 100);
-        alert("Your word guess was incorrect. You Lose! Try again..."); // give win message after progress bar finishes
+        playerLost();
     }
 
-    DisableGuessBtns();
 }
 
 
 // * * * * * * * * html element updaters * * * * * * * * *//
 
+async function playerWon(){
+    DisableGuessBtns();
+    UpdateLetterboxLetters();
+    // give message after progress bar finishes
+    await SetProgress( wordProgress, 100);
+    alert("You Chose Correctly!  You Win!");
+}
+async function playerLost(){
+    DisableGuessBtns();
+    // give message after progress bar finishes
+    await SetProgress( manProgress, 100);
+    alert("You Lost! Try again...");
+}
 
 function SetLetterboxVisibility(numberVisible){
     let boxesToRemove = letterBoxes.length - numberVisible;
