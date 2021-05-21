@@ -108,6 +108,8 @@ let manProgress;
 let gallowsDisplay;
 let letterBoxes;
 let letterBoxSpacers;
+let guessHistory;
+let guessRemainingCountElement;
 
 // inputs
 let categoriesDropdown;
@@ -137,6 +139,8 @@ document.addEventListener("DOMContentLoaded", () => {
     gallowsDisplay = document.getElementById("gallows");
     letterBoxes = document.getElementById("word-container").getElementsByClassName("letter-box");
     letterBoxSpacers = document.getElementById("word-container").getElementsByClassName("spacer");
+    guessHistory = document.getElementById("letters-guessed");
+    guessRemainingCountElement = document.getElementById("guess-remaining-count");
 
     categoriesDropdown = document.getElementById("word-categories");
     maxLettersInput = document.getElementById("word-letters-max");
@@ -224,7 +228,11 @@ async function GuessLetter(){
     }
     else {
         SetProgress(manProgress, hangman.guessPercentUsed);
+        guessRemainingCountElement.innerText = hangman.incorrectLimit - hangman.incorrectCount;
     }
+
+    // update the guess history display
+    guessHistory.innerText = hangman.guesses.join(" ");
 
     // did the player win or loose?
     if (hangman.playerWon)
@@ -235,7 +243,6 @@ async function GuessLetter(){
 }
 
 async function GuessWord(){
-
     let word = wordGuessInput.value;
 
     // early out
@@ -245,14 +252,10 @@ async function GuessWord(){
     }
 
     // is word correct?
-    if ( hangman.GuessWord(word) ){
+    if ( hangman.GuessWord(word) )
       playerWon();
-    }
     else
-    {
         playerLost();
-    }
-
 }
 
 

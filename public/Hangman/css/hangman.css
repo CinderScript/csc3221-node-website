@@ -64,6 +64,15 @@ body {
     flex-grow: 1;
 }
 
+#guess-history label{
+    color: dimgray;
+    font-size: 1em;
+}
+#letters-guessed{
+    color: dimgray;
+    font-size: 1.2em;
+}
+
 footer{
     background-color: whitesmoke;
 }
