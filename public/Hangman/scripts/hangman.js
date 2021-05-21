@@ -1,10 +1,11 @@
 
 class HangmanWord{
-    constructor(word, guessLimit = 6) {
+    constructor(word, incorrectLimit = 6) {
         this._word = word.toUpperCase();
         this._hangmanLetters = [...word];
         this._guesses = [];
-        const _guessLimit = guessLimit;
+        this._incorrectLimit = incorrectLimit;
+        this._incorrectCount = 0;
 
         // clear hangman letters
         for (const i in this._hangmanLetters) {
@@ -21,8 +22,24 @@ class HangmanWord{
     get guesses(){
         return [...this._guesses]
     }
-    get guessLimit(){
-        return this._guessLimit;
+    get incorrectLimit(){
+        return this._incorrectLimit;
+    }
+    get incorrectCount(){
+        return this._incorrectCount;
+    }
+    get lettersCompleted(){
+        let count = 0;
+        for (const letter of this._hangmanLetters)
+            if (letter != " ")
+                count++;
+        return count;
+    }
+    get wordPercentComplete(){
+        return Math.ceil( (this.lettersCompleted / this.word.length) * 100 );
+    }
+    get guessPercentUsed(){
+        return Math.ceil( (this.incorrectCount / this.incorrectLimit) * 100 );
     }
 
     GuessLetter(letter) {
@@ -37,8 +54,10 @@ class HangmanWord{
             }
             return true;
         }
-        else
+        else{
+            this._incorrectCount++;
             return false;
+        }
     }
 
     GuessWord(word){
@@ -50,6 +69,10 @@ class HangmanWord{
         }
         else
             return false;
+    }
+
+    HasGuessedLetter(letter){
+        return this._guesses.indexOf(letter) != -1;
     }
 }
 
@@ -164,11 +187,18 @@ async function GuessLetter(){
         return;
     }
 
+    // early out
+    if ( hangman.HasGuessedLetter(letter) ){
+        alert(`You already guessed letter '${letter.toLowerCase()}'.\nTry again.`);
+        return;
+    }
+
     if ( hangman.GuessLetter(letter) ){
         UpdateLetterboxLetters();
-
-        // calculate progress
-
+        SetProgress(wordProgress, hangman.wordPercentComplete);
+    }
+    else {
+        SetProgress(manProgress, hangman.guessPercentUsed);
     }
 }
 
