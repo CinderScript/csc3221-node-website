@@ -108,20 +108,13 @@ async function GuessLetter(){
         alert("To guess a word, you must enter a value.\nTry again.");
         return;
     }
+    // if letter is correct, update the letter boxes
+    for (const char of theHangmanWord)
+        if (char == letter)
+            UpdateLetterboxLetters(guessedLetters);
 
-    // update letter boxes and guesses
-    if ( isLetterCorrect() ){
-        UpdateLetterboxLetters(guessedLetters);
-    }
-
-
-    function isLetterCorrect(){
-        for (const char of theHangmanWord)
-            if (char == letter)
-                return true;
-
-        return false;
-    }
+    // clear old input
+    letterGuessInput.value = "";
 }
 
 async function GuessWord(){
