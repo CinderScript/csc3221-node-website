@@ -124,7 +124,6 @@ let wordGuessBtn = document.getElementById("guess-word-btn");
 // gameplay vars
 let hangman;
 var playSound = new Audio("http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/pause.wav");
-var looseSound = new Audio("http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/theygotcha.ogg");
 var incorrectSound = new Audio("https://rpg.hamsterrepublic.com/wiki-images/d/d7/Oddbounce.ogg");
 var correctSound = new Audio("http://codeskulptor-demos.commondatastorage.googleapis.com/descent/gotitem.mp3");
 
