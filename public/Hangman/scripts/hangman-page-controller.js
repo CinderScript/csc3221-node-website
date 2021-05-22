@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // set gamestate
     DisableGuessBtns();
 
-    gallowsDisplay.innerText = GetRenderedMan(0);
+    gallowsDisplay.innerText = HangmanGame.GetRenderedMan(0);
 });
 
 
@@ -120,7 +120,7 @@ Start guessing.`);
     SetLetterboxVisibility(chosenWord.length);
 
     // reset the game
-    hangman = new HangmanWord(chosenWord);
+    hangman = new HangmanGame(chosenWord);
     let guessedLetters = [];
     EnableGuessBtns();
     letterGuessInput.value = "";
@@ -131,7 +131,7 @@ Start guessing.`);
     guessRemainingCountElement.innerText = 5;
 
     // draw gallows
-    SetContentAnimated(gallowsDisplay, GetRenderedMan(0), GetRenderedMan(6), 5, 150);
+    SetContentAnimated(gallowsDisplay, HangmanGame.GetRenderedMan(0), HangmanGame.GetRenderedMan(), 5, 150);
 
     // sound effect
     playSound.play();
@@ -180,8 +180,8 @@ function GuessLetter(){
     }
 
     // update gallows
-    let renderedCurrentMan = GetRenderedMan(hangman.incorrectCount);
-    SetContentAnimated(gallowsDisplay, renderedCurrentMan, GetRenderedMan(0));
+    let renderedCurrentMan = hangman.GetCurrentRenderedMan();
+    SetContentAnimated(gallowsDisplay, renderedCurrentMan, HangmanGame.GetRenderedMan(0));
 
 }
 
@@ -200,6 +200,10 @@ function GuessWord(){
         correctSound.play();
     }
     else {
+        // update gallows
+        let renderedCurrentMan = hangman.GetCurrentRenderedMan();
+        SetContentAnimated(gallowsDisplay, renderedCurrentMan, HangmanGame.GetRenderedMan(0));
+
         playerLost();
         incorrectSound.play();
     }
@@ -286,19 +290,6 @@ function EnableGuessBtns(){
     letterGuessBtn.removeAttribute("disabled");
 }
 
-function GetRenderedMan(stage){
-    let manImage = hangmanASCII;
-    for (const part of bodyparts) {
-        if (part.stage <= stage){
-            manImage = manImage.replaceAll(part.bodyNumber, part.ascii);
-        }
-        else{
-            manImage = manImage.replaceAll(part.bodyNumber, " ");
-        }
-    }
-    return manImage;
-}
-
 function SetContentAnimated(element, stateOn, stateOff, numberOfFlashes = 6, interval = 180){
 
     element.innerHTML = stateOn; // for iphone -> someties does not run setInterval callbacks
@@ -342,218 +333,3 @@ function FilterWordsBySize(words, sizeCap){
         }
     }
 }
-
-// * * * * * * * * DATA * * * * * * * * *//
-
-// partial list from wikipedia
-let wordBank =
-    [
-        {"category": "Animal", "words": [
-                "Aardvark",
-                "Albatross",
-                "Alligator",
-                "Alpaca",
-                "Ant",
-                "Antelope",
-                "Armadillo",
-                "Badger",
-                "Barracuda",
-                "Bat",
-                "Bear",
-                "Beaver",
-                "Bee",
-                "Bison",
-                "Boar",
-                "Buffalo",
-                "Butterfly",
-                "Camel",
-                "Caribou",
-                "Cat",
-                "Caterpillar",
-                "Cheetah",
-                "Chicken",
-                "Chimpanzee",
-                "Chinchilla",
-                "Clam",
-                "Cobra",
-                "Cockroach",
-                "Cod",
-                "Coyote",
-                "Crab",
-                "Crane",
-                "Crocodile",
-                "Crow",
-                "Deer",
-                "Dinosaur",
-                "Dog",
-                "Dolphin",
-                "Dove",
-                "Dragonfly",
-                "Duck",
-                "Eagle",
-                "Eel",
-                "Elephant",
-                "Elk",
-                "Emu",
-                "Falcon",
-                "Ferret",
-                "Finch",
-                "Fish",
-                "Flamingo",
-                "Fly",
-                "Fox",
-                "Frog",
-                "Gazelle",
-                "Gerbil",
-                "Giraffe",
-                "Goat",
-                "Goldfish",
-                "Goose",
-                "Gorilla",
-                "Grasshopper",
-                "Hamster",
-                "Hare",
-                "Hawk",
-                "Hedgehog",
-                "Heron",
-                "Herring",
-                "Hippopotamus",
-                "Hornet",
-                "Horse",
-                "Hummingbird",
-                "Hyena",
-                "Jackal",
-                "Jaguar",
-                "Jay",
-                "Jellyfish",
-                "Kangaroo",
-                "Kookabura",
-                "Lark",
-                "Lemur",
-                "Leopard",
-                "Lion",
-                "Llama",
-                "Lobster",
-                "Locust",
-                "Magpie",
-                "Manatee",
-                "Meerkat",
-                "Mink",
-                "Mole",
-                "Mongoose",
-                "Monkey",
-                "Moose",
-                "Mosquito",
-                "Mouse",
-                "Mule",
-                "Newt",
-                "Nightingale",
-                "Octopus",
-                "Opossum",
-                "Ostrich",
-                "Otter",
-                "Owl",
-                "Panther",
-                "Parrot",
-                "Pelican",
-                "Penguin",
-                "Pheasant",
-                "Pig",
-                "Pigeon",
-                "Pony",
-                "Porcupine",
-                "Quail",
-                "Rabbit",
-                "Raccoon",
-                "Ram",
-                "Rat",
-                "Raven",
-                "Reindeer",
-                "Rhinoceros",
-                "Salamander",
-                "Salmon",
-                "Scorpion",
-                "Seahorse",
-                "Seal",
-                "Shark",
-                "Sheep",
-                "Shrew",
-                "Skunk",
-                "Snail",
-                "Snake",
-                "Sparrow",
-                "Spider",
-                "Squid",
-                "Squirrel",
-                "Stingray",
-                "Stork",
-                "Swan",
-                "Tapir",
-                "Tarsier",
-                "Termite",
-                "Tiger",
-                "Toad",
-                "Trout",
-                "Turkey",
-                "Turtle",
-                "Viper",
-                "Vulture",
-                "Walrus",
-                "Wasp",
-                "Weasel",
-                "Whale",
-                "Wolf",
-                "Wolverine",
-                "Wombat",
-                "Woodchuck",
-                "Woodpecker",
-                "Worm",
-                "Yak",
-                "Zebra"
-            ]},
-        {"category": "Fruit", "words": ["apple", "pear", "fig", "grape", "watermelon", "strawberry", "persimmon", "cherimoya", "plumb", "avacado"]},
-        {"category": "State Of Mind", "words": ["fearful", "happy", "sad", "mad", "indecisive", "content", "agitated", "confused", "twitterpated", "convinced", "terrified"]}
-    ];
-
-
-/* HANGMAN DRAWING OUTPUT
-        ===§===\\==tt==
-           §    \  ||
-           §     \ ||
-           š()    \||
-          /|\      ||
-           |       ||
-         _/ \_     ||
-========      //===TT=========
-*/
-
-// each of the numbers in the hangman ascii is replaced with
-// the corresponding character depending on the stage
-
-let hangmanASCII = "" +
-    "        ===§===\\\\==tt==\n" +
-    "           §    \\  ||\n" +
-    "           §     \\ ||\n" +
-    "           š12    \\||\n" +
-    "          435      ||\n" +
-    "           3       ||\n" +
-    "         67 89     ||\n" +
-    "========      //===TT=========\n" +
-    "  \\||/        /         \\||/\n" +
-    "   ||        /           ||\n" +
-    "   ||                    ||\n" +
-    "  /||\\                  /||\\\n" +
-    "==####=^^======^====^^^=####===\n" +
-    "                       -picasso";
-
-let bodyparts = [
-    { stage: 1, bodyNumber : 1,  ascii : '(' },
-    { stage: 1, bodyNumber : 2,  ascii : ')' },
-    { stage: 2, bodyNumber : 3,  ascii : '|' },
-    { stage: 2, bodyNumber : 3,  ascii : '|' },
-    { stage: 3, bodyNumber : 4,  ascii : '/' },
-    { stage: 4, bodyNumber : 5,  ascii : '\\' },
-    { stage: 5, bodyNumber : 6,  ascii : '_' },
-    { stage: 5, bodyNumber : 7,  ascii : '/' },
-    { stage: 6, bodyNumber : 8,  ascii : '\\' },
-    { stage: 6, bodyNumber : 9,  ascii : '_' } ];
