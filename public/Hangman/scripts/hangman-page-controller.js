@@ -46,6 +46,12 @@ document.addEventListener("DOMContentLoaded", () => {
     letterBoxSpacers = document.getElementById("word-container").getElementsByClassName("spacer");
     guessHistory = document.getElementById("letters-guessed");
     guessRemainingCountElement = document.getElementById("guess-remaining-count");
+    document.getElementById("show-word-btn").onclick = () => {
+        if (hangman)
+            alert(hangman.word);
+        else
+            alert("you must play the game first!");
+    };
 
     categoriesDropdown = document.getElementById("word-categories");
     maxLettersInput = document.getElementById("word-letters-max");
@@ -66,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
             GuessWord();
         }
     };
-
 
     // POPULATE CATEGORIES DROP DOWN
     for (const wordGroup of wordBank){
