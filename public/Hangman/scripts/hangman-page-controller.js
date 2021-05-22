@@ -52,10 +52,20 @@ document.addEventListener("DOMContentLoaded", () => {
     wordGuessInput = document.getElementById("word-guess");
     letterGuessInput = document.getElementById("letter-guess");
 
-    //settup button handlers
+    //settup event handlers
     document.getElementById("play-btn").onclick = Play;
-    letterGuessBtn.onclick = GuessLetter;
-    wordGuessBtn.onclick = GuessWord;
+    letterGuessBtn.onclick = GuessLetter;             // GuessLetter on Enter
+    letterGuessInput.onkeypress = (event) => {        // GuessLetter on Enter
+        if (event.code === 'Enter') {
+            GuessLetter();
+        }
+    };
+    wordGuessBtn.onclick = GuessWord;               // GuessWord on Click
+    wordGuessInput.onkeypress = (event) => {        // GuessWord on Enter
+        if (event.code === 'Enter') {
+            GuessWord();
+        }
+    };
 
 
     // POPULATE CATEGORIES DROP DOWN
