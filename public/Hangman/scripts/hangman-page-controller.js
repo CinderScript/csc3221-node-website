@@ -131,7 +131,7 @@ Start guessing.`);
     guessRemainingCountElement.innerText = 5;
 
     // draw gallows
-    Flash(gallowsDisplay, GetRenderedMan(0), GetRenderedMan(6), 5, 150);
+    SetContentAnimated(gallowsDisplay, GetRenderedMan(0), GetRenderedMan(6), 5, 150);
 
     // sound effect
     playSound.play();
@@ -181,7 +181,7 @@ function GuessLetter(){
 
     // update gallows
     let renderedCurrentMan = GetRenderedMan(hangman.incorrectCount);
-    Flash(gallowsDisplay, renderedCurrentMan, GetRenderedMan(0));
+    SetContentAnimated(gallowsDisplay, renderedCurrentMan, GetRenderedMan(0));
 
 }
 
@@ -299,7 +299,7 @@ function GetRenderedMan(stage){
     return manImage;
 }
 
-function Flash(element, stateOn, stateOff, numberOfFlashes = 6, interval = 180){
+function SetContentAnimated(element, stateOn, stateOff, numberOfFlashes = 6, interval = 180){
 
     element.innerHTML = stateOn; // for iphone -> someties does not run setInterval callbacks
 
