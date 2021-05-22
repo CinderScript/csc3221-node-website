@@ -284,10 +284,16 @@ function UpdateLetterboxLetters(){
 function DisableGuessBtns(){
     wordGuessBtn.setAttribute("disabled", "disabled");
     letterGuessBtn.setAttribute("disabled", "disabled");
+
+    wordGuessInput.setAttribute("disabled", "disabled");
+    letterGuessInput.setAttribute("disabled", "disabled");
 }
 function EnableGuessBtns(){
     wordGuessBtn.removeAttribute("disabled");
     letterGuessBtn.removeAttribute("disabled");
+
+    wordGuessInput.removeAttribute("disabled");
+    letterGuessInput.removeAttribute("disabled");
 }
 
 function SetContentAnimated(element, stateOn, stateOff, numberOfFlashes = 6, interval = 180){
