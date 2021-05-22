@@ -300,6 +300,9 @@ function GetRenderedMan(stage){
 }
 
 function Flash(element, stateOn, stateOff, numberOfFlashes = 6, interval = 180){
+
+    element.innerHTML = stateOn; // for iphone -> someties does not run setInterval callbacks
+
     let flashCount = 0;
     let toggle = true;
     let flashing = setInterval(()=>{
