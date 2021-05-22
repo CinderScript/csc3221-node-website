@@ -103,6 +103,11 @@ function Play(){
     let randomIndex = Math.floor(Math.random() * length)
     let chosenWord = possibleWords[randomIndex];
 
+    alert(
+`Picking a word with ${maxLettersInput.value} letters or fewer...
+Found a word with ${chosenWord.length} letters!
+Start guessing.`);
+
     // initialize the word letter boxes
     SetLetterboxVisibility(chosenWord.length);
 
