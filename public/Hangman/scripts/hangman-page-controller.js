@@ -206,7 +206,7 @@ function playerLost(){
     DisableGuessBtns();
     // give message after progress bar finishes
     SetProgress( manProgress, 100);
-    setTimeout(()=> {alert("You Lost! Try again...")}, 700 )
+    setTimeout(()=> {alert(`You Lost!\nThe word was: ${hangman.word}\nTry again...`)}, 700 )
 }
 
 function SetLetterboxVisibility(numberVisible){
