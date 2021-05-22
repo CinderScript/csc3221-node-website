@@ -89,6 +89,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // gameplay settup.  Choose word show letter positions
 function Play(){
+
+    // early out
+    if (maxLettersInput.value < 3){
+        alert("You much choose a value greater then 2.");
+        maxLettersInput.value = 3;
+        return;
+    }
+
     let possibleWords;
     // find words in the selected catagory
     for ( const wordGroup of wordBank )
