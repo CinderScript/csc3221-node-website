@@ -1,4 +1,4 @@
-# csc3221-node-website
+# hangman-game-javascript
 Node Express and JavaScript website for CSC 3221
 
 This website was built while learning Node Express and Javascript. I have kept this repo because the Hangman page is a good example of my experience with frontend Javascript.
